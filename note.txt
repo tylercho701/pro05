@@ -1,0 +1,28 @@
+function checkUserIdExist(){
+	  	let user_id = $("#user_id").val()
+		if(user_id.length == 0){
+			alert("아이디를 입력하시기 바랍니다.");
+			$("#user_id").focus();
+			return;
+		}
+		var params = { id:$("#user_id").val() }
+		$.ajax({
+			url:"${root }user/checkUserIdExist",
+			type:"get",
+			dataType:"text",
+			data:params,
+			success : function(result){
+				if(result.trim() == "true"){
+					alert("사용할 수 있는 아이디입니다");
+					$("#userIdExist").val("true");
+				}else{
+					alert("이미 존재하는 아이디입니다");
+					$("#userIdExist").val("false");
+				}
+			}	
+		});
+	}
+ 
+  function resetUserIdExist(){	  
+	  $("#userIdExist").val("false");
+  } // resetUserIdExist

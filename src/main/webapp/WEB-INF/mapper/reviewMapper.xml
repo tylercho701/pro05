@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="review">
+	<insert id="insertReview" parameterType="com.matjip.dto.ReviewDTO">
+		<![CDATA[
+			insert into review values(rev_seq.nextval, #{rs_idx}, #{rev_title}, #{rev_score}, #{rev_id}, #{rev_file}, #{rev_content}, default);
+		]]>
+	</insert>
+	<!-- 
+	<update>
+		<![CDATA[
+		]]>
+	</update>
+	<delete>
+		<![CDATA[
+		]]>
+	</delete> -->
+	<!-- 모든 리뷰 보기 -->
+	<select id="reviewAll" resultType="com.matjip.dto.ReviewDTO">
+		<![CDATA[
+			select * from review order by rev_regdate desc
+		]]>
+	</select>
+	<!-- 가게별 리뷰 -->
+	<select id="reviewByResId" parameterType="java.lang.Integer" resultType="com.matjip.dto.ReviewDTO">
+		<![CDATA[
+			select * from review where rs_idx = #{rs_idx} order by rev_regdate desc
+		]]>
+	</select>
+	<!-- 지역별 리뷰 -->
+	<select id="reviewByRegionCate" parameterType="java.lang.String" resultType="com.matjip.dto.ReviewDTO">
+		<![CDATA[
+			select a.* from review a, restaurant b where b.rs_region_cate = #{rs_region_cate} and a.rs_idx = b.rs_idx order by a.rev_regdate desc
+		]]>
+	</select>
+</mapper>
