@@ -3,8 +3,8 @@ package com.matjip.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.matjip.bean.UserBean;
 import com.matjip.dao.UserDAO;
-import com.matjip.dto.UserDTO;
 
 @Service
 public class UserService {
@@ -12,8 +12,8 @@ public class UserService {
 	@Autowired
 	private UserDAO userDAO;
 	
-	public UserDTO checkExistUser(UserDTO loginUserInfo) {
-		UserDTO loggedUserInfo = userDAO.checkExistUser(loginUserInfo);
+	public UserBean checkExistUser(UserBean loginUserInfo) {
+		UserBean loggedUserInfo = userDAO.checkExistUser(loginUserInfo);
 		return loggedUserInfo;
 	}
 	
@@ -26,16 +26,16 @@ public class UserService {
 		return result;
 	}
 	
-	public void insertUser(UserDTO joinUserBean) {
+	public void insertUser(UserBean joinUserBean) {
 		userDAO.insertUser(joinUserBean);
 	}
 	
-	public void updateUser(UserDTO updateUserBean) {
+	public void updateUser(UserBean updateUserBean) {
 		userDAO.updateUser(updateUserBean);
 	}
 	
-	public UserDTO getLoggedUserInfo(String sid) {
-		UserDTO loggedUserInfo = userDAO.getLoggedUserInfo(sid);
+	public UserBean getLoggedUserInfo(String sid) {
+		UserBean loggedUserInfo = userDAO.getLoggedUserInfo(sid);
 		
 		return loggedUserInfo;
 	}

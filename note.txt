@@ -26,3 +26,60 @@ function checkUserIdExist(){
   function resetUserIdExist(){	  
 	  $("#userIdExist").val("false");
   } // resetUserIdExist
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+   		<!-- TOP MENU - Responsive navbar-->
+        <c:import url="/WEB-INF/views/include/top_menu.jsp" />
+        
+        <!-- Footer-->
+        <c:import url="/WEB-INF/views/include/bottom_menu.jsp" />
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="${root }resources/js/scripts.js"></script>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        

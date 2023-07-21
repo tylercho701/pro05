@@ -12,6 +12,10 @@
 	<link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
+
+	<!-- TOP MENU - Responsive navbar-->
+    <c:import url="/WEB-INF/views/include/top_menu.jsp" />
+
 	<h2>reviewInsert</h2>
 	<form:form action="" method="post" modelAttribute="reviewDTO">
 		<%-- <form:hidden path="rs_idx"/> --%>
@@ -25,5 +29,12 @@
 		<form:textarea path="rev_content"/>
 		<form:button type="submit">제출</form:button>
 	</form:form>
+	
+	<!-- Footer-->
+    <c:import url="/WEB-INF/views/include/bottom_menu.jsp" />
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="${root }resources/js/scripts.js"></script>
 </body>
 </html>

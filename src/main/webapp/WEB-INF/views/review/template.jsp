@@ -12,6 +12,10 @@
 	<link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
+
+	<!-- TOP MENU - Responsive navbar-->
+    <c:import url="/WEB-INF/views/include/top_menu.jsp" />
+
 	<table>
 		<tbody>
 		<c:forEach items="${reviewList }" var="review" varStatus="status">
@@ -34,5 +38,13 @@
 	<div>
 		<a href="javascript:history.go(-1)">뒤로가기</a>
 	</div>
+	
+	<!-- Footer-->
+    <c:import url="/WEB-INF/views/include/bottom_menu.jsp" />
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="${root }resources/js/scripts.js"></script>
+	
 </body>
 </html>

@@ -92,12 +92,12 @@
 						</div>
 						<div class="form-group">
 							<form:label path="user_pw">비밀번호</form:label>
-							<form:password path="user_pw" class="form-control" value="user_pw" showPassword="true"/>
+							<form:password path="user_pw" class="form-control"/>
 							<form:errors path="user_pw" style="color:red;"/>
 						</div>
 						<div class="form-group">
 							<form:label path="user_pw2">비밀번호확인</form:label>
-							<form:password path="user_pw2" class="form-control" value="user_pw" showPassword="true"/>
+							<form:password path="user_pw2" class="form-control"/>
 							<form:errors path="user_pw2" style="color:red;"/>
 						</div>
 						<div class="form-group">

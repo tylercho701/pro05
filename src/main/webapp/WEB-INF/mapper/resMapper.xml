@@ -1,7 +1,87 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="res">
+
+<mapper namespace = "restaurant">
+	<!-- 게시글 리스트 가져오기 -->
+ 	<select id="getRestList" parameterType="java.lang.Integer" resultType="com.matjip.bean.RestBean">
+		<![CDATA[
+			SELECT RS.rs_idx, RS.rs_name, F.food_name, R.region_name 
+			FROM restaurant RS, food F, region R 
+			where F.food_cate=RS.rs_food_cate and R.region_cate=RS.rs_region_cate		
+		]]>		
+	</select> 
+	
+		<!-- 맛집 상세보기 -->
+ 	<select id="getRestDetail" parameterType="java.lang.Integer" 
+ 								resultType="com.matjip.bean.RestBean">
+		<![CDATA[
+			
+			SELECT * FROM restaurant where rs_idx=#{rs_idx}
+				
+		]]>		
+	</select> 
+	
+	<!--
+	   content_table 에 insert 하기 #{content_file, jdbcType=VARCHAR} 
+	    ㄴ 이미지를 추가 하지 않으면 content_file 에 들어오는 값이 null 이 되는데
+	       이 때, null 값이 들어와도 오류가 발생하지 않게 하려면 jdbcType=VARCHAR 를 설정함
+	 -->
+	 	
+	 	<!-- 맛집 추가하기 -->
+		<insert id="addRestInfo" parameterType="com.matjip.bean.RestBean" >
+		
+		<!-- 현재 Sequence 값 가져와서 
+		SELECT CONTENT_SEQ.nextval FROM DUAL
+		cONTENTbEAN 객체의 멤버변수 content_idx에 할당한후,
+		INSERT 문을 실행함
+		VALUES(CONTENT_SEQ.nextval,...) -> VALUES(#{content_idx})
+		-->
+		 <selectKey keyProperty = "rs_idx" order="BEFORE" resultType="java.lang.Integer">
+			<![CDATA[	
+				SELECT REST_SEQ.nextval FROM DUAL
+			]]>					
+		</selectKey>	
+	
+		<![CDATA[
+			
+			Insert INTO restaurant(rs_idx, rs_food_cate, rs_name, rs_phone, rs_region_cate, rs_addr,rs_file, rs_content) 
+			VALUES(#{rs_idx}, #{rs_food_cate}, #{rs_name}, #{rs_phone}, #{rs_region_cate}, #{rs_addr},#{rs_file, jdbcType=VARCHAR}, #{rs_content})
+				
+		]]>		
+	</insert> 
+	
+ 	<!--  상세페이지에서 수정 버튼 눌렀을때 게시글 수정하기 -->
+ 	<update id="modifyRestInfo" parameterType="com.matjip.bean.RestBean">
+		<![CDATA[
+			
+			update restaurant set rs_name =#{rs_name},rs_food_cate=#{rs_food_cate},rs_phone=#{rs_phone},
+			rs_region_cate=#{rs_region_cate},rs_addr=#{rs_addr}, rs_file=#{rs_file},rs_content=#{rs_content} 
+			where rs_idx= #{rs_idx}
+				
+		]]>		
+	</update> 
+	
+	<!-- 게시글 전체 개수 가져오기 -->
+ 	<select id="getRestCnt" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+		<![CDATA[
+			SELECT COUNT(*) FROM restaurant	
+		]]>		
+	</select>
+	
+	<!-- 상세페이지에서 삭제 버튼 눌렀을때 게시글 삭제하기 -->
+ 	<delete id="deleteRestInfo" parameterType="java.lang.Integer">
+		<![CDATA[
+			
+			DELETE FROM restaurant WHERE rs_idx = #{rs_idx}
+				
+		]]>		
+	</delete> 	
 	
 </mapper>
+
+
+			
+	
+	

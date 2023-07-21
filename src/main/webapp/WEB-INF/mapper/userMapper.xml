@@ -9,36 +9,36 @@
 		]]>
 	</select>
 	
-	<select id="getLoginUserInfo" parameterType="com.matjip.dto.UserDTO" 
-	                                 resultType="com.matjip.dto.UserDTO" >
+	<select id="getLoginUserInfo" parameterType="com.matjip.bean.UserBean" 
+	                                 resultType="com.matjip.bean.UserBean" >
 		<![CDATA[
 	         SELECT user_id, user_name FROM user_tbl 
 	  	     WHERE user_id = #{user_id} and user_pw = #{user_pw}
 	    ]]>  
 	</select> 
 	
-	<select id="checkExistUser" parameterType="com.matjip.dto.UserDTO" 
-	                                 resultType="com.matjip.dto.UserDTO" >
+	<select id="checkExistUser" parameterType="com.matjip.bean.UserBean" 
+	                                 resultType="com.matjip.bean.UserBean" >
 		<![CDATA[
 	         SELECT * FROM user_tbl 
 	  	     WHERE user_id = #{user_id} and user_pw = #{user_pw}
 	    ]]>  
 	</select> 
 	
-	<insert id="insertUser" parameterType="com.matjip.dto.UserDTO">
+	<insert id="insertUser" parameterType="com.matjip.bean.UserBean">
 		<![CDATA[
 			insert into user_tbl values(#{user_id}, #{user_pw}, #{user_name}, #{user_phone}, #{user_email})
 		]]>
 	</insert>
 	
-	<update id="updateUser" parameterType="com.matjip.dto.UserDTO">
+	<update id="updateUser" parameterType="com.matjip.bean.UserBean">
 		<![CDATA[
 			update user_tbl set user_pw = #{user_pw}, user_name = #{user_name}, user_phone = #{user_phone}, user_email = #{user_email} where user_id = #{user_id}
 		]]>
 	</update>
 	
 	<select id="getLoggedUserInfo" parameterType="java.lang.String" 
-	                                 resultType="com.matjip.dto.UserDTO">
+	                                 resultType="com.matjip.bean.UserBean">
 		<![CDATA[
 			select * from user_tbl where user_id = #{sid}
 		]]>

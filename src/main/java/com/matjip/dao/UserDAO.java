@@ -4,6 +4,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.matjip.bean.UserBean;
 import com.matjip.dto.UserDTO;
 
 @Repository
@@ -19,8 +20,8 @@ public class UserDAO {
 	}
 	*/
 	
-	public UserDTO checkExistUser(UserDTO userDTO) {
-		UserDTO loggedUserInfo = sqlSessionTemplate.selectOne("user.checkExistUser", userDTO);
+	public UserBean checkExistUser(UserBean loginUserInfo) {
+		UserBean loggedUserInfo = sqlSessionTemplate.selectOne("user.checkExistUser", loginUserInfo);
 		return loggedUserInfo;
 	}
 	
@@ -29,16 +30,16 @@ public class UserDAO {
 		return user_name;
 	}
 	
-	public void insertUser(UserDTO joinUserBean) {
+	public void insertUser(UserBean joinUserBean) {
 		sqlSessionTemplate.insert("user.insertUser", joinUserBean);
 	}
 	
-	public void updateUser(UserDTO updateUserBean) {
+	public void updateUser(UserBean updateUserBean) {
 		sqlSessionTemplate.update("user.updateUser", updateUserBean);
 	}
 	
-	public UserDTO getLoggedUserInfo(String sid) {
-		UserDTO loggedUserInfo = sqlSessionTemplate.selectOne("user.getLoggedUserInfo", sid);
+	public UserBean getLoggedUserInfo(String sid) {
+		UserBean loggedUserInfo = sqlSessionTemplate.selectOne("user.getLoggedUserInfo", sid);
 		
 		return loggedUserInfo;
 	}
