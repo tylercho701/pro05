@@ -12,29 +12,29 @@
 	<link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
-
-	<!-- TOP MENU - Responsive navbar-->
-    <c:import url="/WEB-INF/views/include/top_menu.jsp" />
-
 	<h2>reviewInsert</h2>
-	<form:form action="" method="post" modelAttribute="reviewDTO">
-		<%-- <form:hidden path="rs_idx"/> --%>
+	<form:form action="/review/insertReview" method="post" modelAttribute="reviewBean" enctype="multipart/form-data" >
+		<form:hidden path="rs_idx"/>
+		<form:hidden path="rev_idx" />
 		<form:label path="rev_title">제목</form:label>
 		<form:input type="text" path="rev_title"/><br>
-		<%-- <form:label path="rev_score">점수</form:label>
-		<form:input type="number" path="rev_score"/><br> --%>
-		<%-- <form:hidden path="rev_id"/> --%>
-		<%-- <form:hidden path="rev_file"/> --%>
+		<form:errors path="rev_title" style="color:red;" /><br>
+		
+		<form:label path="rev_score">점수</form:label>
+		<form:input type="number" path="rev_score"/><br>
+		<form:errors path="rev_score" style="color:red;" /><br>
+		
+		<!-- accept="image/*  :  이미지 파일 확장자는 전부 첨부 가능 -->
+		<form:label path="upload_file">첨부 이미지</form:label>
+		<form:input type="file" path="upload_file" accept="image/*"/><br>
+		
 		<form:label path="rev_content">내용</form:label>
-		<form:textarea path="rev_content"/>
+		<form:textarea path="rev_content"/><br>
+		<form:errors path="rev_content" style="color:red;" /><br>
+		
+		<input type="hidden" id="page" name="page" value="${page }">
+		
 		<form:button type="submit">제출</form:button>
 	</form:form>
-	
-	<!-- Footer-->
-    <c:import url="/WEB-INF/views/include/bottom_menu.jsp" />
-    <!-- Bootstrap core JS-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Core theme JS-->
-    <script src="${root }resources/js/scripts.js"></script>
 </body>
 </html>

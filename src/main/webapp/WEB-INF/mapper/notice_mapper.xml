@@ -38,8 +38,9 @@
  								resultType="com.matjip.bean.NoticeBean">
 		<![CDATA[
 			
-			SELECT noti_idx, noti_title, noti_author, TO_CHAR(noti_regdate, 'YYYY-MM-DD') noti_regdate
-			FROM notice ORDER BY noti_idx desc
+			SELECT N.noti_idx, N.noti_title, U.user_name, TO_CHAR(N.noti_regdate ,'YYYY-MM-DD') noti_regdate
+			FROM notice N INNER JOIN user_tbl U On N.noti_author = U.user_id
+			ORDER BY noti_idx desc
 				
 		]]>		
 	</select>

@@ -24,8 +24,8 @@
 </head>
 <body>
 
-<!-- TOP MENU - Responsive navbar-->
-<c:import url="/WEB-INF/views/include/top_menu.jsp" />
+<!-- Header -->
+<c:import url="/WEB-INF/views/include/top_menu.jsp"></c:import>	
 
 <!-- 게시글 리스트 -->
 <div class="container" style="margin-top:100px">
@@ -42,11 +42,12 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="noticeBean" items="${notiList }">						
+					<c:forEach var="noticeBean" items="${notiList }">
+					<input type="hidden" id="user_id" name="user_id" value="${loginUserBean.user_id }">				
 						<tr>
 							<td class="text-center d-none d-md-table-cell">${noticeBean.noti_idx }</td>							
 							<td class="text-center d-none d-md-table-cell"><a href="detail?noti_idx=${noticeBean.noti_idx }&page=${page }">${noticeBean.noti_title }</a></td>
-							<td class="text-center d-none d-md-table-cell">${noticeBean.noti_author }</td>
+							<td class="text-center d-none d-md-table-cell">${noticeBean.user_name }</td>
 							<td class="text-center d-none d-md-table-cell">${noticeBean.noti_regdate }</td>						
 						</tr>
 					</c:forEach>					
@@ -98,19 +99,19 @@
 				</ul>
 			</div>			
 			<div class="text-right">
+			<c:if test="${sid == 'admin'}">
 				<a href="${root}/notice/write?page=${page}" class="btn btn-primary">글쓰기</a>
+			</c:if>
 			</div>
 			
 		</div>
 	</div>
 </div>
-
 <!-- Footer-->
-<c:import url="/WEB-INF/views/include/bottom_menu.jsp" />
+<c:import url="/WEB-INF/views/include/bottom_menu.jsp"></c:import>	
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
-<script src="${root }resources/js/scripts.js"></script>
-
+<script src="${root }/resources/js/scripts.js"></script>
 </body>
 </html>

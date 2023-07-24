@@ -23,5 +23,8 @@ public class NoticeBean {
 	private String noti_author;
 	private String noti_file;
 	private String noti_regdate;
+	
+	public String user_id;
+	public String user_name; 	
 		
 }

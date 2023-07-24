@@ -3,12 +3,16 @@ package com.matjip.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -51,7 +55,7 @@ public class QnaController {
 	}
 	
 	@GetMapping("/qna/read")
-	public String qnaDetail(@RequestParam("qna_idx") String qna_idx,
+	public String qnaDetail(@RequestParam("qna_idx") int qna_idx,
 							@RequestParam("page") int page,	Model model){
 		
 		model.addAttribute("qna_idx", qna_idx);
@@ -66,101 +70,123 @@ public class QnaController {
 		
 		return "qna/read";
 	}
-//	
-//	@GetMapping("/write")
-//	public String boardWrite(@ModelAttribute("writeContentBean") ContentBean writeContentBean,
-//							 @RequestParam("board_info_idx") int board_info_idx,
-//							 @RequestParam("page") int page, Model model){
-//		
-//		model.addAttribute("page", page);
-//		writeContentBean.setContent_board_idx(board_info_idx);
-//		
-//		return "board/write";
-//	}
-//	
-//	// BindingResult는 검증 오류가 발생할 경우 오류 내용을 보관하는 스프링 프레임워크에서 제공하는 객체
-//	@PostMapping("/write_procedure")
-//	public String writeProcedure(@Valid @ModelAttribute("writeContentBean") ContentBean writeContentBean, 
-//								 BindingResult result, Model model,
-//								 @RequestParam("page") int page){
-//		
-//		model.addAttribute("page", page);
-//		if(result.hasErrors()){
-//			System.out.println("에러O");
-//			System.out.println(result.getAllErrors());
-//			
-//			return "board/write";
-//		}
-//			
-//			boardService.addContentInfo(writeContentBean);
-//			System.out.println("에러X");
-//			return "board/write_success";
-//	}
-//	
-//	@GetMapping("/not_writer")
-//	public String notWriter() {
-//		
-//		return "board/not_writer";
-//	}
-//	
-//	@GetMapping("/modify")
-//	public String boardModify(@RequestParam("board_info_idx") int board_info_idx,
-//							  @RequestParam("content_idx") int content_idx,
-//							  @RequestParam("page") int page,
-//							  @ModelAttribute("modifyContentBean") ContentBean modifyContentBean,
-//							  Model model){
-//		
-//		model.addAttribute("board_info_idx", board_info_idx);
-//		model.addAttribute("content_idx", content_idx);
-//		model.addAttribute("page", page);
-//		
-//		// 수정페이지에 출력할 데이터 가져오기
-////		modifyContentBean = boardService.getContentInfo(content_idx);
-////	    model.addAttribute("modifyContentBean", modifyContentBean);
-//		
-//		ContentBean tmpContentBean = boardService.getContentInfo(content_idx);
-//		modifyContentBean.setContent_writer_name(tmpContentBean.getContent_writer_name());
-//		modifyContentBean.setContent_date(tmpContentBean.getContent_date());
-//		modifyContentBean.setContent_subject(tmpContentBean.getContent_subject());
-//		modifyContentBean.setContent_text(tmpContentBean.getContent_text());
-//		modifyContentBean.setContent_file(tmpContentBean.getContent_file());
-//		modifyContentBean.setContent_writer_idx(tmpContentBean.getContent_writer_idx());
-//		
-//		// SQL 문에 없고 RequestScope 에 공유 되있는 값 가져와야한다
-//		modifyContentBean.setContent_board_idx(board_info_idx);
-//		modifyContentBean.setContent_idx(content_idx);
-//		
-//				
-//		return "board/modify";
-//	}  	  
-//	
-//	@PostMapping("/modify_procedure")
-//	public String modifyProcedure(@Valid @ModelAttribute("modifyContentBean") ContentBean modifyContentBean,
-//								  BindingResult result,  Model model,
-//								  @RequestParam("page") int page) {
-//		
-//		model.addAttribute("page", page);
-//		if(result.hasErrors()){
-//			System.out.println("에러O");
-//			System.out.println(result.getAllErrors());
-//			
-//			return "board/modify";
-//		}
-//			boardService.modifyContentInfo(modifyContentBean);
-//			System.out.println("에러X");		
-//			return "board/modify_success";
-//	}
-//	
-//	@GetMapping("/delete")
-//	public String boardDelete(@RequestParam("board_info_idx") int board_info_idx,
-//			  				  @RequestParam("content_idx") int content_idx,
-//			  				  @RequestParam("page") int page,
-//			  				  Model model){
-//		
-//		boardService.deleteContentInfo(content_idx);
-//		model.addAttribute("board_info_idx", board_info_idx);
-//		model.addAttribute("page", page);
-//		
-//		return "board/delete";
-//	}	
+	@GetMapping("/write")
+	public String qnaWrite(@ModelAttribute("writeQnaBean") QnaBean writeQnaBean,
+						   @RequestParam("page") int page, Model model){
+		
+		model.addAttribute("page", page);
+				
+		return "qna/write";
+	}
+	
+	// BindingResult는 검증 오류가 발생할 경우 오류 내용을 보관하는 스프링 프레임워크에서 제공하는 객체
+	@PostMapping("/write_procedure")
+	public String writeProcedure(@Valid @ModelAttribute("writeQnaBean") QnaBean writeQnaBean, 
+								 BindingResult result, Model model,
+								 @RequestParam("page") int page){
+		
+		model.addAttribute("page", page);
+		if(result.hasErrors()){
+			System.out.println("에러O");
+			System.out.println(result.getAllErrors());
+			
+			return "qna/write";
+		}
+			
+			qnaService.addQna(writeQnaBean);
+			System.out.println("에러X");
+			return "qna/write_success";
+	}
+	// 답변 달기
+	@GetMapping("/qnaReply")
+	public String qnaReply(@RequestParam("qna_idx") int qna_idx,
+						   @ModelAttribute("replyQnaBean") QnaBean replyQnaBean,
+						   @RequestParam("page") int page, Model model){
+		
+		model.addAttribute("page", page);
+		
+		QnaBean tmpreplyQnaBean = qnaService.getQnaDetail(qna_idx);		
+		
+		replyQnaBean.setLev((Integer)tmpreplyQnaBean.getLev()+1);
+		replyQnaBean.setParno(tmpreplyQnaBean.getQna_idx());		
+		System.out.println("답변달기 : "+replyQnaBean);				
+		return "qna/qnaReply";
+	}
+	
+	// BindingResult는 검증 오류가 발생할 경우 오류 내용을 보관하는 스프링 프레임워크에서 제공하는 객체
+	@PostMapping("/qnaReply_procedure")
+	public String replyProcedure(@Valid @ModelAttribute("replyQnaBean") QnaBean replyQnaBean, 
+								 BindingResult result, Model model,
+								 @RequestParam("page") int page){
+		System.out.println("프로시져1 : "+replyQnaBean);
+		model.addAttribute("replyQnaBean", replyQnaBean);
+		System.out.println("프로시져2 : "+replyQnaBean);
+		model.addAttribute("page", page);
+		if(result.hasErrors()){
+			System.out.println("에러O");
+			System.out.println(result.getAllErrors());
+			
+			return "qna/qnaReply";
+		}
+			
+			qnaService.addQnaReply(replyQnaBean);
+			System.out.println("에러X");
+			return "qna/qnaReply_success";
+	}	
+	
+	@GetMapping("/modify")
+	public String QnaModify(@RequestParam("qna_idx") int qna_idx,
+	  						@RequestParam("page") int page,
+	  						@ModelAttribute("modifyQnaBean") QnaBean modifyQnaBean,
+	  						Model model){
+			
+		model.addAttribute("qna_idx", qna_idx);
+		model.addAttribute("page", page);
+		
+		// 수정페이지에 출력할 데이터 가져오기
+		// modifyNoticeBean = noticeService.getNotiDetail(noti_idx);
+	  // model.addAttribute("modifyNoticeBean", modifyNoticeBean);
+		
+		QnaBean tmpQnaBean = qnaService.getQnaDetail(qna_idx);
+		modifyQnaBean.setQna_title(tmpQnaBean.getQna_title());
+		modifyQnaBean.setQna_content(tmpQnaBean.getQna_content());
+		modifyQnaBean.setQna_id(tmpQnaBean.getQna_id());
+		modifyQnaBean.setLev(tmpQnaBean.getLev());
+		modifyQnaBean.setParno(tmpQnaBean.getParno());
+		modifyQnaBean.setQna_resdate(tmpQnaBean.getQna_resdate());
+		
+		// SQL 문에 없고 RequestScope 에 공유 되있는 값 가져와야한다
+		modifyQnaBean.setQna_idx(qna_idx);
+								
+		return "qna/modify";
+	}  	  
+	
+	@PostMapping("/modify_procedure")
+	public String modifyProcedure(@Valid @ModelAttribute("modifyNoticeBean") QnaBean modifyQnaBean,
+								  BindingResult result,  Model model,
+								  @RequestParam("page") int page,
+								  @RequestParam("qna_idx") int qna_idx) {
+		
+		model.addAttribute("qna_idx", qna_idx);
+		model.addAttribute("page", page);
+		if(result.hasErrors()){
+			System.out.println("에러O");
+			System.out.println(result.getAllErrors());
+			
+			return "qna/modify";
+		}
+		qnaService.modifyQna(modifyQnaBean);
+			System.out.println("에러X");		
+			return "qna/modify_success";
+	}
+	
+	@GetMapping("/delete")
+	public String qnaDelete(@RequestParam("qna_idx") int qna_idx,
+			  				@RequestParam("page") int page, Model model){
+				
+		qnaService.deleteQna(qna_idx);	
+		model.addAttribute("page", page);
+		
+		return "qna/delete";
+	}	
 }

@@ -19,8 +19,8 @@
 </head>
 <body>
 
-<!-- TOP MENU - Responsive navbar-->
-<c:import url="/WEB-INF/views/include/top_menu.jsp" />
+<!-- Header -->
+<c:import url="/WEB-INF/views/include/top_menu.jsp"></c:import>	
 
 <div class="container" style="margin-top:100px">
 	<div class="row">
@@ -60,7 +60,7 @@
 						<div class="form-group">
 							<div class="text-right">
 								<form:button class="btn btn-primary">수정완료</form:button>
-								<a href="${root}/notice/detail?noti_idx=${notice_idx}&page=${page}" class="btn btn-info">취소</a>
+								<a href="${root}/notice/detail?notice_idx=${notice_idx}&page=${page}" class="btn btn-info">취소</a>
 							</div>
 						</div>
 					</form:form>
@@ -70,13 +70,11 @@
 		<div class="col-sm-3"></div>
 	</div>
 </div>
-
 <!-- Footer-->
-<c:import url="/WEB-INF/views/include/bottom_menu.jsp" />
+<c:import url="/WEB-INF/views/include/bottom_menu.jsp"></c:import>	
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
-<script src="${root }resources/js/scripts.js"></script>
-
+<script src="./resources/js/scripts.js"></script>
 </body>
 </html>

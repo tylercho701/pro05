@@ -19,8 +19,8 @@
 </head>
 <body>
 
-<!-- TOP MENU - Responsive navbar-->
-<c:import url="/WEB-INF/views/include/top_menu.jsp" />
+<!-- Header -->
+<c:import url="/WEB-INF/views/include/top_menu.jsp"></c:import>	
 
 <div class="container" style="margin-top:100px">
 	<div class="row">
@@ -56,13 +56,11 @@
 					</c:if>					
 					<div class="form-group">
 						<div class="text-right">
-							<a href="${root}/notice/main?page=${page}" class="btn btn-primary">목록보기</a>
-						 	
-						 	<%-- <c:if test="${loginUserBean.user_id == noticeDetailBean.user_id }"> --%>
+							<a href="${root}/notice/main?page=${page}" class="btn btn-primary">목록보기</a>						 	
+						 	<c:if test="${sid == 'admin'}">
 								<a href="${root}/notice/modify?noti_idx=${noti_idx}&page=${page}" class="btn btn-info">수정하기</a>
 								<a href="${root}/notice/delete?noti_idx=${noti_idx}&page=${page}" class="btn btn-danger">삭제하기</a>
-							<%-- </c:if>  --%>
-							<!-- ${root}/notice/modify?noti_idx=${noti_idx}&page=${page} / ${root}/notice/delete??noti_idx=${noti_idx}&page=${page} -->
+							</c:if>
 						</div>
 					</div>
 				</div>
@@ -71,13 +69,11 @@
 		<div class="col-sm-3"></div>
 	</div>
 </div>
-
 <!-- Footer-->
-<c:import url="/WEB-INF/views/include/bottom_menu.jsp" />
+<c:import url="/WEB-INF/views/include/bottom_menu.jsp"></c:import>	
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
-<script src="${root }resources/js/scripts.js"></script>
-
+<script src="${root}/resources/js/scripts.js"></script>
 </body>
 </html>

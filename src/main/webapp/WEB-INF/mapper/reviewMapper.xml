@@ -3,36 +3,88 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="review">
-	<insert id="insertReview" parameterType="com.matjip.dto.ReviewDTO">
+	<!-- 리뷰 등록 -->
+	<insert id="insertReview" parameterType="com.matjip.bean.ReviewBean">
 		<![CDATA[
-			insert into review values(rev_seq.nextval, #{rs_idx}, #{rev_title}, #{rev_score}, #{rev_id}, #{rev_file}, #{rev_content}, default);
+			insert into review values(rev_seq.nextval, #{rs_idx}, #{rev_title}, #{rev_score}, #{rev_id}, #{rev_file, jdbcType=VARCHAR}, #{rev_content}, default)
 		]]>
 	</insert>
-	<!-- 
-	<update>
+	<!-- 리뷰 업데이트 -->
+	<update id="updateReview" parameterType="com.matjip.bean.ReviewBean">
 		<![CDATA[
+			update review set rev_title=#{rev_title}, rev_score=#{rev_score}, rev_file=#{rev_file, jdbcType=VARCHAR}, rev_content=#{rev_content} where rev_idx=${rev_idx}
 		]]>
 	</update>
-	<delete>
+	<!-- 리뷰 삭제 -->
+	<delete id="deleteReview" parameterType="java.lang.Integer">
 		<![CDATA[
+			delete from review where rev_idx = #{rev_idx}
 		]]>
-	</delete> -->
+	</delete>
+	<!-- 리뷰 단일 쿼리 불러오기 -->
+	<select id="reviewByRevIdx" parameterType="java.lang.Integer" resultType="com.matjip.bean.ReviewBean">
+		<![CDATA[
+			select * from review where rev_idx = ${rev_idx} order by rev_regdate desc
+		]]>
+	</select>
+	<!-- 내가 작성한 리뷰 불러오기 -->
+	<select id="reviewByRevId" parameterType="java.lang.String" resultType="com.matjip.bean.ReviewBean">
+		<![CDATA[
+			select * from review where rev_id like lower('${rev_id}') order by rev_regdate desc
+		]]>
+	</select>
 	<!-- 모든 리뷰 보기 -->
-	<select id="reviewAll" resultType="com.matjip.dto.ReviewDTO">
+	<select id="reviewAll" resultType="com.matjip.bean.ReviewBean">
 		<![CDATA[
 			select * from review order by rev_regdate desc
 		]]>
 	</select>
 	<!-- 가게별 리뷰 -->
-	<select id="reviewByResId" parameterType="java.lang.Integer" resultType="com.matjip.dto.ReviewDTO">
+	<select id="reviewByResId" parameterType="java.lang.Integer" resultType="com.matjip.bean.ReviewBean">
 		<![CDATA[
 			select * from review where rs_idx = #{rs_idx} order by rev_regdate desc
 		]]>
 	</select>
+	<!-- 가게별 전체 리뷰 개수 -->
+	<select id="getReviewCntByResId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+		<![CDATA[
+			select count(*) as revCnt from review where rs_idx = #{rs_idx}	
+		]]>
+	</select>
 	<!-- 지역별 리뷰 -->
-	<select id="reviewByRegionCate" parameterType="java.lang.String" resultType="com.matjip.dto.ReviewDTO">
+	<select id="reviewByRegionCate" parameterType="java.lang.String" resultType="com.matjip.bean.ReviewBean">
 		<![CDATA[
 			select a.* from review a, restaurant b where b.rs_region_cate = #{rs_region_cate} and a.rs_idx = b.rs_idx order by a.rev_regdate desc
 		]]>
 	</select>
+	<!-- 레스토랑 코드로 레스토랑 이름 가져오기 -->
+	<select id="rsNameByrsIdx" parameterType="java.lang.Integer" resultType="java.lang.String">
+		<![CDATA[
+			select rs_name from restaurant where rs_idx=#{rs_idx}
+		]]>
+	</select>
+	<!-- 레스토랑-region 지역 코드 지역 이름 연결-->
+	<select id="regCodeName" parameterType="java.lang.Integer" resultType="java.lang.String">
+		<![CDATA[
+			select b.region_name from restaurant a, region b where a.rs_idx=#{rs_idx} and a.rs_region_cate = b.region_cate
+		]]>
+	</select>
+	<!-- 레스토랑-food 음식 코드 음식 이름 연결-->
+	<select id="foodCodeName" parameterType="java.lang.Integer" resultType="java.lang.String">
+		<![CDATA[
+			select b.food_name from restaurant a, food b where a.rs_idx=#{rs_idx} and a.rs_food_cate = b.food_cate
+		]]>
+	</select>
+	<!-- 리뷰 좋아요 추가 -->
+	<update id="addRevLike" parameterType="java.lang.Integer">
+		<![CDATA[
+			update review set rev_like = #{rev_like}+1 where rev_idx = #{rev_idx}
+		]]>
+	</update>
+	<!-- 리뷰 좋아요 취소 -->
+	<update id="delRevLike" parameterType="java.lang.Integer">
+		<![CDATA[
+			update review set rev_like = #{rev_like}-1 where rev_idx = #{rev_idx}
+		]]>
+	</update>
 </mapper>

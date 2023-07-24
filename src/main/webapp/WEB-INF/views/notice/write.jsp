@@ -19,8 +19,8 @@
 </head>
 <body>
 
-<!-- TOP MENU - Responsive navbar-->
-<c:import url="/WEB-INF/views/include/top_menu.jsp" />
+<!-- Header -->
+<c:import url="/WEB-INF/views/include/top_menu.jsp"></c:import>
 
 <div class="container" style="margin-top:100px">
 	<div class="row">
@@ -30,9 +30,12 @@
 				<div class="card-body">
 					<form:form action="${root}/notice/write_procedure" method="post" 
 							modelAttribute="writeNoticeBean" enctype="multipart/form-data">
-					<form:hidden path="noti_idx" />
-					<form:hidden path="noti_author" value="관리자" />					
-					<input type="hidden" name="page" value="${page }" />					
+					<form:hidden path="noti_idx" />														
+					<input type="hidden" name="page" value="${page }" />				
+						<div class="form-group">
+							<form:label path="noti_author">작성자</form:label>
+							<form:input path="noti_author" class="form-control" value="${sid }" readonly="true" />			
+						</div>							
 						<div class="form-group">
 							<form:label path="noti_title">제목</form:label>
 							<form:input path="noti_title" class="form-control"/>
@@ -59,13 +62,11 @@
 		<div class="col-sm-3"></div>
 	</div>
 </div>
-
 <!-- Footer-->
-<c:import url="/WEB-INF/views/include/bottom_menu.jsp" />
+<c:import url="/WEB-INF/views/include/bottom_menu.jsp"></c:import>	
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
-<script src="${root }resources/js/scripts.js"></script>
-
+<script src="${root}/resources/js/scripts.js"></script>
 </body>
 </html>

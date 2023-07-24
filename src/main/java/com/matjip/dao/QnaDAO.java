@@ -7,7 +7,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.matjip.bean.NoticeBean;
 import com.matjip.bean.QnaBean;
 
 @Repository
@@ -16,11 +15,18 @@ public class QnaDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;	
 	
-//	public void addContentInfo(NoticeBean writeNoticeBean){
-//		
-//		sqlSessionTemplate.insert("notice.addNotiInfo", writeNoticeBean);
-//	}
+	// 질문 입력하기
+	public void addQna(QnaBean writeQnaBean){
+		
+		sqlSessionTemplate.insert("qna.addQna", writeQnaBean);
+	}
 	
+	// 답변 입력하기
+	public void addQnaReply(QnaBean replyQnaBean){
+		
+		sqlSessionTemplate.insert("qna.addQnaReply", replyQnaBean);
+	}
+
 	// 게시글 리스트 가져오기
 	public List<QnaBean> getQnaList(RowBounds rowBounds){
 		
@@ -29,23 +35,23 @@ public class QnaDAO {
 	}
 	
 	// 상세페이지에 출력할 데이터 가져오기
-	public QnaBean getQnaInfo(String qna_idx) {
+	public QnaBean getQnaDetail(int qna_idx) {
 		
-		return sqlSessionTemplate.selectOne("qna.getQnaInfo", qna_idx);
+		return sqlSessionTemplate.selectOne("qna.getQnaDetail", qna_idx);
 	}
-//	
-//	// 수정페이지에서 게시글 수정하기
-//	public void modifyContentInfo(ContentBean modifyContentBean) {
-//		
-//		sqlSessionTemplate.update("board.modifyContentInfo", modifyContentBean);
-//	}
-//	
-//	// 게시글 삭제하기
-//	public void deleteContentInfo(int content_idx) {
-//		
-//		sqlSessionTemplate.delete("board.deleteContentInfo",content_idx);
-//	}
-//	
+	
+	// 수정페이지에서 게시글 수정하기
+	public void modifyQna(QnaBean modifyQnaBean) {
+		
+		sqlSessionTemplate.update("qna.getModify", modifyQnaBean);
+	}
+	
+	// 게시글 삭제하기
+	public void deleteQna(int qna_idx) {
+		
+		sqlSessionTemplate.delete("qna.deleteQna",qna_idx);
+	}
+	
 	// 게시글 전체 개수 가져오기
 	public int getQnaCnt() {
 		
