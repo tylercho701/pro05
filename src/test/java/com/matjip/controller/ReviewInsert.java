@@ -34,7 +34,7 @@ public class ReviewInsert {
 
 			for (int i = 1; i <= 1000; i++) {
 				pstmt.setString(1, randomResIdxGen());
-				pstmt.setString(2, "제목" + i);
+				pstmt.setInt(2, i);
 				pstmt.setInt(3, randomScoreGen());
 				pstmt.setString(4, randomRevIdGen());
 				pstmt.setString(5, null);

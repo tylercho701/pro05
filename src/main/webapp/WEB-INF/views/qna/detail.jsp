@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
 <c:set var="root" value="${pageContext.request.contextPath }/" /> 
 <!DOCTYPE html>
 <html>
@@ -49,13 +50,52 @@
 								<a href="${root }qna/delete?qna_idx=${qna_idx}&page=${page}" class="btn btn-danger">삭제하기</a>
 							</c:if>
 						</div>
-					</div>
+					</div>	
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-3"></div>
 	</div>
-</div>
+</div>			
+<hr>
+<h3 style="text-align: center;" >답글</h3>
+
+<c:forEach var="replyQnaBean" items="${qnaReplyList }">	
+<c:if test="${replyQnaBean.parno==qnaDetailBean.qna_idx}">				
+<div class="container" style="margin-top:100px">
+	<div class="row">
+		<div class="col-sm-3"></div>
+		<div class="col-sm-6">
+			<div class="card shadow">
+				<div class="card-body">								
+					<div class="form-group">	
+						<div class="card-body">									
+							<div class="form-group">
+								<label for="qna_id">작성자</label>
+								<input type="text" id="qna_id" name="qna_id" class="form-control" value="${replyQnaBean.qna_id }" disabled="disabled"/>
+							</div>									
+							<div class="form-group">
+								<label for="qna_title">제목</label>
+								<input type="text" id="qna_title" name="qna_title" class="form-control" value="${replyQnaBean.qna_title }" disabled="disabled"/>
+							</div>
+							<div class="form-group">
+								<label for="qna_content">내용</label>
+								<textarea id="qna_content" name="qna_content" class="form-control" rows="10" style="resize:none" disabled="disabled">${replyQnaBean.qna_content }</textarea>
+							</div>
+							<div class="form-group">
+								<c:if test="${sid == replyQnaBean.qna_id}">									
+									<a href="${root }qna/modify?qna_idx=${replyQnaBean.qna_idx}&page=${page}" class="btn btn-info">수정하기</a>
+									<a href="${root }qna/delete?qna_idx=${replyQnaBean.qna_idx}&page=${page}" class="btn btn-danger">삭제하기</a>
+								</c:if>	
+							</div>								
+						</div>
+					</div>										
+				</div>	
+				</div>				
+			</div>
+		</div>	
+	</div>
+</c:if>			
+</c:forEach>
 
 
 </body>

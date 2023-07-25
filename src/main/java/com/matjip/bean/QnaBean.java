@@ -15,6 +15,7 @@ public class QnaBean {
 	private String qna_resdate;	
 	private int lev;
 	private int parno;
+	private int reply_cnt;
 	
 	private String user_id;
 	

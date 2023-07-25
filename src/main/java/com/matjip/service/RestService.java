@@ -151,5 +151,15 @@ public class RestService {
 	public List<RegionBean> getRegionTable() {
 		return restDAO.getRegionTable();
 	}
+	
+	public List<RestBean> getFilteredRestList_A(RestBean filteredRestBean){
+		return restDAO.getFilteredRestList_A(filteredRestBean);
+	}
+	public List<RestBean> getFilteredRestList_R(RestBean filteredRestBean){
+		return restDAO.getFilteredRestList_R(filteredRestBean);
+	}
+	public List<RestBean> getFilteredRestList_F(RestBean filteredRestBean){
+		return restDAO.getFilteredRestList_F(filteredRestBean);
+	}
 
 }

@@ -61,5 +61,15 @@ public class RestDAO {
 	public List<RegionBean> getRegionTable() {
 		return sqlSessionTemplate.selectList("restaurant.getRegionTable");
 	}
+	
+	public List<RestBean> getFilteredRestList_A(RestBean filteredRestBean){
+		return sqlSessionTemplate.selectList("restaurant.getFilteredRestList_A", filteredRestBean);
+	}
+	public List<RestBean> getFilteredRestList_R(RestBean filteredRestBean){
+		return sqlSessionTemplate.selectList("restaurant.getFilteredRestList_R", filteredRestBean);
+	}
+	public List<RestBean> getFilteredRestList_F(RestBean filteredRestBean){
+		return sqlSessionTemplate.selectList("restaurant.getFilteredRestList_F", filteredRestBean);
+	}
 
 }

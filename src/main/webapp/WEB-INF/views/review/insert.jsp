@@ -8,33 +8,68 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Insert title here</title>
-	<link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
+	<title>리뷰 작성</title>
+	<!-- Bootstrap CDN -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+	<style>
+	#noPage {display:none;}
+	</style>
 </head>
 <body>
-	<h2>reviewInsert</h2>
-	<form:form action="/review/insertReview" method="post" modelAttribute="reviewBean" enctype="multipart/form-data" >
-		<form:hidden path="rs_idx"/>
-		<form:hidden path="rev_idx" />
-		<form:label path="rev_title">제목</form:label>
-		<form:input type="text" path="rev_title"/><br>
-		<form:errors path="rev_title" style="color:red;" /><br>
-		
-		<form:label path="rev_score">점수</form:label>
-		<form:input type="number" path="rev_score"/><br>
-		<form:errors path="rev_score" style="color:red;" /><br>
-		
-		<!-- accept="image/*  :  이미지 파일 확장자는 전부 첨부 가능 -->
-		<form:label path="upload_file">첨부 이미지</form:label>
-		<form:input type="file" path="upload_file" accept="image/*"/><br>
-		
-		<form:label path="rev_content">내용</form:label>
-		<form:textarea path="rev_content"/><br>
-		<form:errors path="rev_content" style="color:red;" /><br>
-		
-		<input type="hidden" id="page" name="page" value="${page }">
-		
-		<form:button type="submit">제출</form:button>
-	</form:form>
+	<c:import url="${root }/WEB-INF/views/include/top_menu.jsp" />
+	
+	<div class="container" style="margin-top:100px">
+		<div class="row">
+			<div class="col-sm-3"></div>
+			<div class="col-sm-6">
+				<div class="card shadow">
+					<div class="card-body">
+						<div class="form-group">
+							<form:form action="/review/insertReview" method="post" modelAttribute="reviewBean" enctype="multipart/form-data" >
+								<%-- <form:hidden path="rs_idx"/> --%>
+								<input type="hidden" id="rs_idx" name="rs_idx" value="${rs_idx }">
+								
+								<form:label path="rev_title">제목</form:label>
+								<form:input type="text" path="rev_title" class="form-control"/>
+								<form:errors path="rev_title" style="color:red;" /><br>
+								
+								<form:label path="rev_score">점수</form:label>
+								<form:input type="number" path="rev_score" class="form-control"/>
+								<form:errors path="rev_score" style="color:red;" /><br>
+								
+								<!-- accept="image/*  :  이미지 파일 확장자는 전부 첨부 가능 -->
+								<form:label path="upload_file" >첨부 이미지</form:label>
+								<form:input type="file" path="upload_file" class="form-control" accept="image/*"/><br>
+								
+								<form:label path="rev_content">내용</form:label>
+								<form:textarea path="rev_content" class="form-control"/>
+								<form:errors path="rev_content" style="color:red;" /><br>
+								
+								<input type="hidden" id="page" name="page" value="${page }">
+								
+								<div class="form-group">
+									<div class="text-right">
+										<form:button type="submit" class="btn btn-info">리뷰 등록</form:button>
+										<form:button type="reset" class="btn btn-danger">초기화</form:button>
+										<a href="${root }/restaurant/detail?rs_idx=${reviewBean.rs_idx }&page=${page }" class="btn btn-info">뒤로가기</a>
+									</div>
+								</div>
+							</form:form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<c:import url="${root }/WEB-INF/views/include/bottom_menu.jsp" />
+	<!-- Bootstrap core JS-->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- Core theme JS-->
+	<script src="./resources/js/scripts.js"></script>
+	
 </body>
 </html>

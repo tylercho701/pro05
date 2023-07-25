@@ -74,5 +74,26 @@
 	<!-- StandardServletMultipartResolver 등록 -->
 	<beans:bean	class="org.springframework.web.multipart.support.StandardServletMultipartResolver" id="multipartResolver" />
 
+	<!-- interceptor -->
+	<interceptors>
+		<interceptor>
+			<!-- <mapping path="/user/**"/> -->
+			<mapping path="/restaurant/**"/>
+			<mapping path="/review/**"/>
+			<exclude-mapping path="/restaurant/main"/>
+			<exclude-mapping path="/user/login"/>
+			<exclude-mapping path="/user/login_fail"/>
+			<exclude-mapping path="/user/login_prodedure"/>
+			<exclude-mapping path="/user/join"/>
+			<exclude-mapping path="/user/join_prodedure"/>
+			<exclude-mapping path="/user/invalidUser"/>
+			<beans:bean class="com.matjip.interceptor.UserInterceptor" />
+		</interceptor>
+		<interceptor>
+			<mapping path="/review/updateReview"/>
+			<mapping path="/review/deleteReview"/>
+			<beans:bean class="com.matjip.interceptor.ReviewInterceptor" />
+		</interceptor>
+	</interceptors>
 
 </beans:beans>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- localhost(127.0.0.1):portnumber/projectname => Context Path -->
 <%-- <c:url var="root" value="/" /> 이것과 아래는 같다. --%>
 <c:set var="root" value="${pageContext.request.contextPath }" />  
@@ -15,6 +16,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
 <style>
 #noPage {display:none;}
 </style>
@@ -28,6 +30,25 @@
 	<div class="card shadow">
 		<div class="card-body">
 			<h4 class="card-title">맛집리스트보기</h4>
+			<form:form action="${root }/restaurant/restFilter_procedure" method="post" modelAttribute="filteredRestBean">
+				<label for="rs_region_cate"> 지역분류 </label>
+				<form:select path="region_name">
+					<form:option value="0" >----선택하세요----</form:option>
+					<form:option value="서귀포">서귀포</form:option>
+					<form:option value="제주도">제주도</form:option>
+				</form:select>
+				<label for="rs_food_cate"> 음식분류 </label>
+				<form:select path="food_name">
+					<form:option value="0">----선택하세요----</form:option>
+					<form:option value="식사">음식</form:option>
+					<form:option value="디저트">카페</form:option>
+				</form:select>
+				<form:button>필터</form:button>
+			</form:form>
+			
+	          <div class="text-right">
+	          </div>
+	       
 			<table class="table table-hover" id='restList'>
 				<thead>
 					<tr>
@@ -38,13 +59,40 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="restBean" items="${restList }">						
-						<tr>
-							<td class="text-center d-none d-md-table-cell">${restBean.rs_idx }</td>							
-							<td><a href="${root}/restaurant/detail?rs_idx=${restBean.rs_idx}&page=${page}">${restBean.rs_name }</a></td>		
-							<td class="text-center d-none d-md-table-cell">${restBean.food_name }</td>	
-							<td class="text-center d-none d-md-table-cell">${restBean.region_name }</td>				
-						</tr>
+					<c:forEach var="restBean" items="${restList }">
+						<c:choose>
+							<c:when test="${region.equals('01') }">
+								<c:if test="${restBean.region_name == '서귀포' }">						
+									<tr>
+										<td class="text-center d-none d-md-table-cell">${restBean.rs_idx }</td>							
+										<td><a href="${root}/restaurant/detail?rs_idx=${restBean.rs_idx}&page=${page}">${restBean.rs_name }</a></td>		
+										<td class="text-center d-none d-md-table-cell">${restBean.food_name }</td>	
+										<td class="text-center d-none d-md-table-cell">${restBean.region_name }</td>				
+									</tr>
+								</c:if>
+							</c:when>
+							<c:when test="${region.equals('02') }">
+								<c:if test="${restBean.food_name == '제주도' }">						
+									<tr>
+										<td class="text-center d-none d-md-table-cell">${restBean.rs_idx }</td>							
+										<td><a href="${root}/restaurant/detail?rs_idx=${restBean.rs_idx}&page=${page}">${restBean.rs_name }</a></td>		
+										<td class="text-center d-none d-md-table-cell">${restBean.food_name }</td>	
+										<td class="text-center d-none d-md-table-cell">${restBean.region_name }</td>				
+									</tr>
+								</c:if>
+							</c:when>
+							<c:otherwise>
+								<tr>
+									<td class="text-center d-none d-md-table-cell">${restBean.rs_idx }</td>							
+									<td><a href="${root}/restaurant/detail?rs_idx=${restBean.rs_idx}&page=${page}">${restBean.rs_name }</a></td>		
+									<td class="text-center d-none d-md-table-cell">${restBean.food_name }</td>	
+									<td class="text-center d-none d-md-table-cell">${restBean.region_name }</td>				
+								</tr>
+							</c:otherwise>
+						</c:choose>
+						<c:if test="${restBean.food_name == '식사' }">						
+							
+						</c:if>
 					</c:forEach>					
 				</tbody>
 			</table>			

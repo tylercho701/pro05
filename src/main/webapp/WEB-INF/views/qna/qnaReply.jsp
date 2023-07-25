@@ -28,12 +28,13 @@
 		<div class="col-sm-6">
 			<div class="card shadow">
 				<div class="card-body">
-					<form:form action="${root}/qna/qnaReply_procedure" method="post" modelAttribute="replyQnaBean" >
+					<form:form action="${root}/qna/qnaReply_procedure" method="post" modelAttribute="replyQnaBean" >				
 					<form:hidden path="qna_idx" />
 					<form:hidden path="lev" />
-					<form:hidden path="parno" />										
+					<form:hidden path="parno" />															
 					<input type="hidden" name="page" value="${page }" />	
 					<input type="hidden" name="parno" value="${qna_idx }" />
+					<input type="hidden" name="numb1" value="${qna_idx }" />
 						<div class="form-group">
 							<form:label path="qna_idx">질문 글 번호</form:label>
 							<form:input path="qna_idx" class="form-control" readonly="true" />			

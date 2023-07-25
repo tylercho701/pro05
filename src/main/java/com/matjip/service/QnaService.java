@@ -88,6 +88,12 @@ public class QnaService {
 		qnaDAO.addQnaReply(replyQnaBean);		
 	}
 	
+	// 답변 달기 성공시 답글수 카운트업!
+	public void qnaReplyCntUp(QnaBean questionBean) {
+		
+		qnaDAO.qnaReplyCntUp(questionBean);		
+	}
+	
 	// 게시글 리스트 가져오기
 	public List<QnaBean> getQnaList(int page){
 
@@ -103,6 +109,17 @@ public class QnaService {
 		// System.out.println(noticeDAO.getNotiList(rowBounds));	
 		return qnaDAO.getQnaList(rowBounds);
 	}
+	
+  //게시글 리스트 가져오기
+  	public List<QnaBean> getQnaReplyList(int page){
+    
+		int start = (page - 1) * pageListcnt;
+		
+		RowBounds rowBounds = new RowBounds(start, pageListcnt);
+	
+		// System.out.println(noticeDAO.getNotiList(rowBounds));	
+		return qnaDAO.getQnaReplyList(rowBounds);
+	}	
 	
 	// 상세페이지에 출력할 데이터 가져오기
 	public QnaBean getQnaDetail(int qna_idx) {
@@ -132,6 +149,14 @@ public class QnaService {
 		qnaDAO.deleteQna(qna_idx);
 	}
 	
+	
+	//답변 삭제시 답글수 카운트다운!
+	public void qnaReplyCntDown(QnaBean questionBean) {
+		
+		qnaDAO.qnaReplyCntDown(questionBean);
+	}
+	
+	
 	// 게시글 전체 개수 가져오기
 	// Controller 로부터 int content_board_idx, int currentP 값을 받아옴
 	// pageListcnt : 페이지당 게시글의 개수
@@ -144,5 +169,5 @@ public class QnaService {
 		
 		return pageBean;
 	}
-
+	
 }

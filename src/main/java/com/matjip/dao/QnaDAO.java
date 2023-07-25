@@ -26,6 +26,12 @@ public class QnaDAO {
 		
 		sqlSessionTemplate.insert("qna.addQnaReply", replyQnaBean);
 	}
+	
+	//답변 달기 성공시 답글수 카운트업!
+	public void qnaReplyCntUp(QnaBean questionBean) {
+		
+		sqlSessionTemplate.update("qna.cntUp",questionBean);		
+	}
 
 	// 게시글 리스트 가져오기
 	public List<QnaBean> getQnaList(RowBounds rowBounds){
@@ -33,6 +39,14 @@ public class QnaDAO {
 		// System.out.println(sqlSessionTemplate.selectList("notice.getNotiList"));
 		return sqlSessionTemplate.selectList("qna.getQnaList", rowBounds );
 	}
+	
+	//게시글 (답변)리스트 가져오기
+	public List<QnaBean> getQnaReplyList(RowBounds rowBounds){
+		
+		// System.out.println(sqlSessionTemplate.selectList("notice.getNotiList"));
+		return sqlSessionTemplate.selectList("qna.getQnaReplyList", rowBounds );
+	}	
+	
 	
 	// 상세페이지에 출력할 데이터 가져오기
 	public QnaBean getQnaDetail(int qna_idx) {
@@ -52,12 +66,18 @@ public class QnaDAO {
 		sqlSessionTemplate.delete("qna.deleteQna",qna_idx);
 	}
 	
+		
+	//답변 삭제시 답글수 카운트다운!
+	public void qnaReplyCntDown(QnaBean questionBean) {
+		
+		sqlSessionTemplate.update("qna.cntDown",questionBean);		
+	}
+	
+	
 	// 게시글 전체 개수 가져오기
 	public int getQnaCnt() {
 		
 		return sqlSessionTemplate.selectOne("qna.getQnaCnt");
 	}
-
-	
 	
 }

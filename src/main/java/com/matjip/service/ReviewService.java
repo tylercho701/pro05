@@ -22,13 +22,21 @@ public class ReviewService {
 	@Value("${path.upload}")
 	private String uploadPath; 
 	
-	//한 페이지에 나오는 게시물 수
+	// restaurant - detail 한 페이지에 나오는 게시물 수
 	@Value("${page.revListCnt}")
 	private int revListCnt;
 	
-	// 페이지 버튼 갯수
+	// restaurant - detail 페이지 버튼 갯수
 	@Value("${page.revPaginationCnt}")
 	private int revPaginationCnt;
+	
+	// review - main/myReview 한 페이지에 나오는 게시물 수
+	@Value("${page.myRevListCnt}")
+	private int myRevListCnt;
+	
+	// review - main/myReview 페이지 버튼 갯수
+	@Value("${page.myRevPaginationCnt}")
+	private int myRevPaginationCnt;
 	
 	// 파일 업로드
 	private String saveUploadFile(MultipartFile uploadFile) {
@@ -40,12 +48,14 @@ public class ReviewService {
 		return fileName;
 	}
 	
-	public void insertReview(ReviewBean reviewBean) {
+	public void insertReview(ReviewBean reviewBean, String rev_id, int rs_idx) {
 		MultipartFile uploadFile = reviewBean.getUpload_file();
 		if(uploadFile.getSize()>0) {
 			String rev_file = saveUploadFile(uploadFile);
 			reviewBean.setRev_file(rev_file);
 		}
+		reviewBean.setRev_id(rev_id);
+		reviewBean.setRs_idx(rs_idx);
 		
 		reviewDAO.insertReview(reviewBean);
 	}
@@ -71,6 +81,20 @@ public class ReviewService {
 		return reviewDAO.reviewByRevId(rev_id);
 	}
 	
+	public List<ReviewBean> reviewByRevId(String rev_id, int myPage){
+		int start = (myPage - 1) * myRevListCnt;
+		RowBounds rowBounds = new RowBounds(start, myRevListCnt);
+		return reviewDAO.reviewByRevId(rev_id, rowBounds);
+	}
+	
+	//리뷰 페이징 처리
+	public PageBean getReviewCntByRevId(String rev_id, int currentPage){
+		// 개인 리뷰 전체 개수 가져오기
+		int myRevCnt = reviewDAO.getReviewCntByRevId(rev_id);
+		PageBean myRevPageBean = new PageBean(myRevCnt, currentPage, myRevListCnt, myRevPaginationCnt);
+		return myRevPageBean;
+	}
+	
 	public List<ReviewBean> reviewAll(){
 		return reviewDAO.reviewAll();
 	}
@@ -91,7 +115,6 @@ public class ReviewService {
 		int revCnt = reviewDAO.getReviewCntByResId(rs_idx);
 		
 		PageBean revPageBean = new PageBean(revCnt, currentPage, revListCnt, revPaginationCnt);
-		
 		return revPageBean;
 	}
 	
@@ -109,6 +132,10 @@ public class ReviewService {
 	
 	public String foodCodeName(int rs_idx) {
 		return reviewDAO.foodCodeName(rs_idx);
+	}
+	
+	public List<ReviewBean> new5starReview() {
+		return reviewDAO.new5starReview();
 	}
 	
 	public void addRevLike(ReviewBean reviewBean) {

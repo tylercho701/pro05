@@ -9,7 +9,7 @@
 		<![CDATA[
 			SELECT RS.rs_idx, RS.rs_name, F.food_name, R.region_name 
 			FROM restaurant RS, food F, region R 
-			where F.food_cate=RS.rs_food_cate and R.region_cate=RS.rs_region_cate		
+			where F.food_cate=RS.rs_food_cate and R.region_cate=RS.rs_region_cate order by rs_idx desc		
 		]]>		
 	</select> 
 	
@@ -88,6 +88,35 @@
 	<select id="getFoodTable" resultType="com.matjip.bean.FoodBean">
 		<![CDATA[
 			select * from food order by food_cate
+		]]>
+	</select>
+	
+	
+	<select id="getFilteredRestList_A" parameterType="com.matjip.bean.RestBean" resultType="com.matjip.bean.RestBean">
+		<![CDATA[
+			SELECT RS.rs_idx, RS.rs_name, F.food_name, R.region_name 
+			FROM restaurant RS, food F, region R 
+			where F.food_cate=RS.rs_food_cate and R.region_cate=RS.rs_region_cate 
+			and F.food_name = #{food_name} and R.region_name = #{region_name} 
+			order by rs_idx desc
+		]]>
+	</select>
+	<select id="getFilteredRestList_R" parameterType="com.matjip.bean.RestBean" resultType="com.matjip.bean.RestBean">
+		<![CDATA[
+			SELECT RS.rs_idx, RS.rs_name, F.food_name, R.region_name 
+			FROM restaurant RS, food F, region R 
+			where F.food_cate=RS.rs_food_cate and R.region_cate=RS.rs_region_cate 
+			and R.region_name = #{region_name} 
+			order by rs_idx desc
+		]]>
+	</select>
+	<select id="getFilteredRestList_F" parameterType="com.matjip.bean.RestBean" resultType="com.matjip.bean.RestBean">
+		<![CDATA[
+			SELECT RS.rs_idx, RS.rs_name, F.food_name, R.region_name 
+			FROM restaurant RS, food F, region R 
+			where F.food_cate=RS.rs_food_cate and R.region_cate=RS.rs_region_cate 
+			and F.food_name = #{food_name} 
+			order by rs_idx desc
 		]]>
 	</select>
 	

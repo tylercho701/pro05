@@ -27,7 +27,7 @@
 		<![CDATA[
 			
 			Insert INTO qna VALUES(#{qna_idx}, #{qna_title},
-			#{qna_content}, #{qna_id}, sysdate, 1, #{qna_idx})
+			#{qna_content}, #{qna_id}, sysdate, 1, #{qna_idx}, default)
 				
 		]]>		
 	</insert> 
@@ -44,21 +44,43 @@
 		<![CDATA[
 			
 			Insert INTO qna VALUES(#{qna_idx}, #{qna_title},
-			#{qna_content}, #{qna_id}, sysdate, #{lev}, #{parno})
+			#{qna_content}, #{qna_id}, sysdate, #{lev}, #{parno}, default)
 				
 		]]>	
 			
 	</insert>
+	
+	<!-- 답변 달기 성공시 답글수 카운트업! -->
+	<update id="cntUp" parameterType="com.matjip.bean.QnaBean" >
+				
+		<![CDATA[
+			
+			UPDATE qna SET reply_cnt=#{reply_cnt}+1 WHERE qna_idx=#{qna_idx}
+				
+		]]>	
+			
+	</update>
 		
-	<!-- 게시글 리스트 가져오기 -->
+	<!-- 게시글 (질문) 리스트 가져오기 -->
  	<select id="getQnaList" parameterType="java.lang.Integer" 
  													resultType="com.matjip.bean.QnaBean">
 		<![CDATA[
 			
-			SELECT * FROM qna ORDER BY parno DESC, lev ASC, qna_idx DESC
+			SELECT * FROM qna WHERE lev=1 ORDER BY qna_idx DESC
 				
 		]]>		
 	</select> 
+	
+	<!-- 게시글 (답변) 리스트 가져오기 -->
+ 	<select id="getQnaReplyList" parameterType="java.lang.Integer" 
+ 													resultType="com.matjip.bean.QnaBean">
+		<![CDATA[
+			
+			SELECT * FROM qna WHERE lev=2 ORDER BY qna_idx DESC
+				
+		]]>		
+	</select> 
+	
 	
 	<!-- 상세페이지에 출력할 데이터 가져오기 작성자(이름)-user_name(content_writer_name), 작성날짜-content_date, 
 		제목-content_subject, 내용-cotent.text, 첨부이미지-content_file -->
@@ -100,6 +122,17 @@
 		]]>		
 	</delete>
 	
+	<!-- 답변 삭제시 답글수 카운트다운! -->
+	<update id="cntDown" parameterType="com.matjip.bean.QnaBean" >
+				
+		<![CDATA[
+			
+			UPDATE qna SET reply_cnt=(SELECT reply_cnt FROM qna WHERE qna_idx=(SELECT parno FROM qna WHERE qna_idx=#{qna_idx}))-1 WHERE qna_idx=#{parno}
+				
+		]]>	
+			
+	</update>
+	
 	<!-- 게시글 전체 개수 가져오기 -->
  	<select id="getQnaCnt" parameterType="java.lang.Integer" resultType="java.lang.Integer">
 		<![CDATA[
@@ -108,5 +141,5 @@
 				
 		]]>		
 	</select> 	
- 
+	 
 </mapper>

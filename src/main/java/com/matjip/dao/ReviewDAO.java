@@ -7,8 +7,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.matjip.bean.FoodBean;
-import com.matjip.bean.RegionBean;
 import com.matjip.bean.ReviewBean;
 
 @Repository
@@ -35,6 +33,14 @@ public class ReviewDAO {
 	
 	public List<ReviewBean> reviewByRevId(String rev_id){
 		return sqlSessionTemplate.selectList("review.reviewByRevId", rev_id);
+	}
+	
+	public List<ReviewBean> reviewByRevId(String rev_id, RowBounds rowBounds){
+		return sqlSessionTemplate.selectList("review.reviewByRevId", rev_id, rowBounds);
+	}
+	
+	public int getReviewCntByRevId(String rev_id){
+		return sqlSessionTemplate.selectOne("review.getReviewCntByRevId", rev_id);
 	}
 	
 	public List<ReviewBean> reviewAll(){
@@ -67,6 +73,10 @@ public class ReviewDAO {
 	
 	public String foodCodeName(int rs_idx) {
 		return sqlSessionTemplate.selectOne("review.foodCodeName", rs_idx);
+	}
+	
+	public List<ReviewBean> new5starReview() {
+		return sqlSessionTemplate.selectList("review.new5starReview");
 	}
 	
 	public void addRevLike(ReviewBean reviewBean) {

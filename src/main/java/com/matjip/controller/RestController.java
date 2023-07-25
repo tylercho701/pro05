@@ -50,7 +50,7 @@ public class RestController {
 	private FoodBean foodBean;
 
 	@GetMapping("/main")
-	public String restaurant(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
+	public String restaurant(@RequestParam(value = "page", defaultValue = "1") int page, @ModelAttribute("filteredRestBean") RestBean filteredRestBean, Model model) {
 		// 게시글 리스트 가져오기
 		List<RestBean> restList = restService.getRestList(page);
 
@@ -97,7 +97,6 @@ public class RestController {
 		
 		PageBean revPageBean = reviewService.getReviewCntByResId(rs_idx, revPage);
 		model.addAttribute("revPageBean", revPageBean);
-
 		return "restaurant/detail";
 	}
 
@@ -172,6 +171,36 @@ public class RestController {
 		model.addAttribute("page", page);
 
 		return "restaurant/delete";
+	}
+	
+	@PostMapping("restFilter_procedure")
+	public String filtering_rest(@RequestParam(value = "page", defaultValue = "1") int page, 
+								 @ModelAttribute("filteredRestBean") RestBean filteredRestBean,
+								 Model model) {
+		
+		// 두 항목 모두 필터할 때,
+		if(!filteredRestBean.getRegion_name().equals("0") && !filteredRestBean.getFood_name().equals("0")) {
+			List<RestBean> restList = restService.getFilteredRestList_A(filteredRestBean);
+			model.addAttribute("restList", restList);
+		} else if(filteredRestBean.getRegion_name().equals("0")) {
+			List<RestBean> restList = restService.getFilteredRestList_R(filteredRestBean);
+			model.addAttribute("restList", restList);
+		} else if(filteredRestBean.getFood_name().equals("0")) {
+			List<RestBean> restList = restService.getFilteredRestList_F(filteredRestBean);
+			model.addAttribute("restList", restList);
+		}
+		
+		List<RestBean> restList = restService.getRestList(page);
+		// DB 로부터 받아온 게시글 리스트(RestBean 객체들이 저장된 ArrayList 객체)를
+		// requestScope 에 restList 라는 이름으로 올림
+		model.addAttribute("restList", restList);
+
+		// System.out.println("notiList 1 :" + notiList);
+		PageBean pageBean = restService.getRestCnt(page);
+		model.addAttribute("pageBean", pageBean);
+		model.addAttribute("page", page);
+		
+		return "restaurant/main";
 	}
 
 }

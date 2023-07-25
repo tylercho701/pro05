@@ -33,6 +33,12 @@
 			select * from review where rev_id like lower('${rev_id}') order by rev_regdate desc
 		]]>
 	</select>
+	<!-- 내가 작성한 리뷰 개수 -->
+	<select id="getReviewCntByRevId" parameterType="java.lang.String" resultType="java.lang.Integer">
+		<![CDATA[
+			select count(*) as revCnt from review where rev_id like lower('${rev_id}')
+		]]>
+	</select>
 	<!-- 모든 리뷰 보기 -->
 	<select id="reviewAll" resultType="com.matjip.bean.ReviewBean">
 		<![CDATA[
@@ -73,6 +79,12 @@
 	<select id="foodCodeName" parameterType="java.lang.Integer" resultType="java.lang.String">
 		<![CDATA[
 			select b.food_name from restaurant a, food b where a.rs_idx=#{rs_idx} and a.rs_food_cate = b.food_cate
+		]]>
+	</select>
+	<!-- 별점 5개 리뷰 중 최신 리뷰 10개 -->
+	<select id="new5starReview" resultType="com.matjip.bean.ReviewBean">
+		<![CDATA[
+			select * from (select * from review where rev_score = 5 order by rev_regdate desc) where rownum <= 10
 		]]>
 	</select>
 	<!-- 리뷰 좋아요 추가 -->
