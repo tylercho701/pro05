@@ -133,5 +133,9 @@ public class UserController {
 		return "user/delete_success";
 	}
 	
+	@GetMapping("/invalidUser")
+	public String invalidUser() {
+		return "user/invalidUser";
+	}
 	
 }

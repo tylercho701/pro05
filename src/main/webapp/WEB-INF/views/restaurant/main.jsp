@@ -60,39 +60,12 @@
 				</thead>
 				<tbody>
 					<c:forEach var="restBean" items="${restList }">
-						<c:choose>
-							<c:when test="${region.equals('01') }">
-								<c:if test="${restBean.region_name == '서귀포' }">						
-									<tr>
-										<td class="text-center d-none d-md-table-cell">${restBean.rs_idx }</td>							
-										<td><a href="${root}/restaurant/detail?rs_idx=${restBean.rs_idx}&page=${page}">${restBean.rs_name }</a></td>		
-										<td class="text-center d-none d-md-table-cell">${restBean.food_name }</td>	
-										<td class="text-center d-none d-md-table-cell">${restBean.region_name }</td>				
-									</tr>
-								</c:if>
-							</c:when>
-							<c:when test="${region.equals('02') }">
-								<c:if test="${restBean.food_name == '제주도' }">						
-									<tr>
-										<td class="text-center d-none d-md-table-cell">${restBean.rs_idx }</td>							
-										<td><a href="${root}/restaurant/detail?rs_idx=${restBean.rs_idx}&page=${page}">${restBean.rs_name }</a></td>		
-										<td class="text-center d-none d-md-table-cell">${restBean.food_name }</td>	
-										<td class="text-center d-none d-md-table-cell">${restBean.region_name }</td>				
-									</tr>
-								</c:if>
-							</c:when>
-							<c:otherwise>
-								<tr>
-									<td class="text-center d-none d-md-table-cell">${restBean.rs_idx }</td>							
-									<td><a href="${root}/restaurant/detail?rs_idx=${restBean.rs_idx}&page=${page}">${restBean.rs_name }</a></td>		
-									<td class="text-center d-none d-md-table-cell">${restBean.food_name }</td>	
-									<td class="text-center d-none d-md-table-cell">${restBean.region_name }</td>				
-								</tr>
-							</c:otherwise>
-						</c:choose>
-						<c:if test="${restBean.food_name == '식사' }">						
-							
-						</c:if>
+						<tr>
+							<td class="text-center d-none d-md-table-cell">${restBean.rs_idx }</td>							
+							<td><a href="${root}/restaurant/detail?rs_idx=${restBean.rs_idx}&page=${page}">${restBean.rs_name }</a></td>		
+							<td class="text-center d-none d-md-table-cell">${restBean.food_name }</td>	
+							<td class="text-center d-none d-md-table-cell">${restBean.region_name }</td>				
+						</tr>
 					</c:forEach>					
 				</tbody>
 			</table>			
