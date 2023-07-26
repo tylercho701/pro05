@@ -39,47 +39,11 @@ public class QnaService {
 	// 페이징 관련 변수 : 페이지 버튼 개수
 	@Value("${page.paginationcnt}")
 	private int pagePaginationcnt;
-	
-	// 파일을 저장하는 메소드
-	/*
-	 * private String saveUploadFile(MultipartFile uploadFile) { String fileName =
-	 * System.currentTimeMillis() + "_" + uploadFile.getOriginalFilename();
-	 * 
-	 * try { uploadFile.transferTo(new File(pathUpload + "/" + fileName));
-	 * }catch(Exception e){ e.printStackTrace(); } return fileName;
-	 * 
-	 * }
-	 */
-	
+			
 	//질문 추가하기
 	public void addQna(QnaBean writeQnaBean) {
-		
-		/*
-		 * System.out.println(writeContentBean.getContent_subject());
-		 * System.out.println(writeContentBean.getContent_text());
-		 * System.out.println(writeContentBean.getUpload_file());
-		 * System.out.println(writeContentBean.getUpload_file().getSize());
-		 */
-		
-		/* MultipartFile uploadFile = writeQnaBean.getUpload_file();
-		
-		if(uploadFile.getSize() > 0) {
 			
-			// 파일이름
-			String fileName = saveUploadFile(uploadFile);
-			System.out.println("fileName : " + fileName);
-			writeQnaBean.setQna_file(fileName);
-		}*/
-		
-		// 현재 로그인 상태인 사람이 작성자가 됨
-		// 작성자 인덱스번호(content_writer_idx) 에
-		// 현재 로그인 상태인 사람(UserBean("loginUserBean")) 의
-		
-		// writeQnaBean.setQna_id(loginUserBean.getUser_id());
-		
-		// Service 에서 DAO(Repository) 에 있는 addContentInfo() 호출하기
-		qnaDAO.addQna(writeQnaBean);
-			
+		qnaDAO.addQna(writeQnaBean);			
 	}
 	
 	// 답변 추가하기
@@ -97,16 +61,15 @@ public class QnaService {
 	// 게시글 리스트 가져오기
 	public List<QnaBean> getQnaList(int page){
 
-//		page	pagination number
-//		1	->	0	(start)	<- (page - 1) * pageListcnt(10)
-//		2	->	10
-//		3	->	20
+  //		page	pagination number
+  //		1	->	0	(start)	<- (page - 1) * pageListcnt(10)
+  //		2	->	10
+  //		3	->	20
 		
 		int start = (page - 1) * pageListcnt;
 		//
-		RowBounds rowBounds = new RowBounds(start, pageListcnt);
-	
-		// System.out.println(noticeDAO.getNotiList(rowBounds));	
+		RowBounds rowBounds = new RowBounds(start, pageListcnt);	
+		
 		return qnaDAO.getQnaList(rowBounds);
 	}
 	
@@ -115,9 +78,8 @@ public class QnaService {
     
 		int start = (page - 1) * pageListcnt;
 		
-		RowBounds rowBounds = new RowBounds(start, pageListcnt);
-	
-		// System.out.println(noticeDAO.getNotiList(rowBounds));	
+		RowBounds rowBounds = new RowBounds(start, pageListcnt);	
+		
 		return qnaDAO.getQnaReplyList(rowBounds);
 	}	
 	
@@ -129,16 +91,6 @@ public class QnaService {
 	
 	// 수정페이지에서 게시글 수정하기
 	public void modifyQna(QnaBean modifyQnaBean) {
-				
-		/*
-		 * MultipartFile upload_file = modifyQnaBean.getUpload_file();
-		 * 
-		 * if(upload_file.getSize() > 0) {
-		 * 
-		 * // 파일이름 String file_name = saveUploadFile(upload_file);
-		 * System.out.println("fileName : " + file_name);
-		 * modifyQnaBean.setQna_file(file_name); }
-		 */
 		
 		qnaDAO.modifyQna(modifyQnaBean);
 	}
@@ -147,15 +99,18 @@ public class QnaService {
 	public void deleteQna(int qna_idx) {
 		
 		qnaDAO.deleteQna(qna_idx);
-	}
+	}		
 	
-	
+	// 답글 삭제하기
+	public void deleteReply(int qna_idx) {
+		
+		qnaDAO.deleteReply(qna_idx);
+	}		
 	//답변 삭제시 답글수 카운트다운!
 	public void qnaReplyCntDown(QnaBean questionBean) {
 		
 		qnaDAO.qnaReplyCntDown(questionBean);
-	}
-	
+	}	
 	
 	// 게시글 전체 개수 가져오기
 	// Controller 로부터 int content_board_idx, int currentP 값을 받아옴
@@ -168,6 +123,5 @@ public class QnaService {
 		PageBean pageBean = new PageBean(qnaCnt, currentP, pageListcnt, pagePaginationcnt);
 		
 		return pageBean;
-	}
-	
+	}	
 }

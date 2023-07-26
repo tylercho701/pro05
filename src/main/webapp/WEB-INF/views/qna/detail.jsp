@@ -84,7 +84,7 @@
 							<div class="form-group">
 								<c:if test="${sid == replyQnaBean.qna_id}">									
 									<a href="${root }qna/modify?qna_idx=${replyQnaBean.qna_idx}&page=${page}" class="btn btn-info">수정하기</a>
-									<a href="${root }qna/delete?qna_idx=${replyQnaBean.qna_idx}&page=${page}" class="btn btn-danger">삭제하기</a>
+									<a href="${root }qna/deleteReply?qna_idx=${replyQnaBean.qna_idx}&page=${page}" class="btn btn-danger">삭제하기</a>
 								</c:if>	
 							</div>								
 						</div>

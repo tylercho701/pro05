@@ -58,7 +58,7 @@
 				<ul class="pagination justify-content-center">
 					
 					<c:choose>
-						<c:when test="${pageBean.prevP <= 0}" >
+						<c:when test="${pageBean.currentP <= 10}">
 							<li class="page-item disabled" id="noPage">								
 								<a href="#" class="page-link">이전</a>
 							</li>

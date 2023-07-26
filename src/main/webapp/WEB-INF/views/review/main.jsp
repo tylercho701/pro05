@@ -41,7 +41,8 @@
 					<thead>
 						<tr>
 							<th class="text-center d-none d-md-table-cell">글번호</th>
-							<th class="text-center w-50">제목</th>
+							<th class="text-center d-none d-md-table-cell">가게명</th>
+							<th class="text-center w-50">리뷰제목</th>
 							<th class="text-center d-none d-md-table-cell">작성자</th>
 							<th class="text-center d-none d-md-table-cell">작성날짜</th>
 						</tr>
@@ -50,6 +51,7 @@
 						<c:forEach var="review" items="${myReviewList }">
 							<tr>
 								<td class="text-center d-none d-md-table-cell">${review.rev_idx }</td>
+								<td class="text-center d-none d-md-table-cell">${review.rs_name }</td>
 								<td class="text-center d-none d-md-table-cell">
 									<a href="${root }/review/detail?rev_idx=${review.rev_idx }&myPage=${myPage }">${review.rev_title }</a>
 								</td>

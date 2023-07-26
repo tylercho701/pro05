@@ -38,4 +38,8 @@ public class ReviewBean {
 	private String rev_content;
 	
 	private String rev_regdate;
+	
+	private String rs_name;
+	private String region_name;
+	private String food_name;
 }

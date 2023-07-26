@@ -74,7 +74,15 @@ public class ReviewService {
 	}
 	
 	public ReviewBean reviewByRevIdx(int rev_idx){
-		return reviewDAO.reviewByRevIdx(rev_idx);
+		ReviewBean reviewBean = reviewDAO.reviewByRevIdx(rev_idx);
+		int rs_idx = reviewBean.getRs_idx();
+		String rs_name = reviewDAO.rsNameByrsIdx(rs_idx);
+		String region_name = reviewDAO.regCodeName(rs_idx);
+		String food_name = reviewDAO.foodCodeName(rs_idx);
+		reviewBean.setRs_name(rs_name);
+		reviewBean.setRegion_name(region_name);
+		reviewBean.setFood_name(food_name);
+		return reviewBean;
 	}
 	
 	public List<ReviewBean> reviewByRevId(String rev_id){
@@ -84,7 +92,13 @@ public class ReviewService {
 	public List<ReviewBean> reviewByRevId(String rev_id, int myPage){
 		int start = (myPage - 1) * myRevListCnt;
 		RowBounds rowBounds = new RowBounds(start, myRevListCnt);
-		return reviewDAO.reviewByRevId(rev_id, rowBounds);
+		List<ReviewBean> reviewList = reviewDAO.reviewByRevId(rev_id, rowBounds);
+		for(ReviewBean reviewBean : reviewList) {
+			int rs_idx = reviewBean.getRs_idx();
+			String rs_name = reviewDAO.rsNameByrsIdx(rs_idx);
+			reviewBean.setRs_name(rs_name);
+		}
+		return reviewList;
 	}
 	
 	//리뷰 페이징 처리

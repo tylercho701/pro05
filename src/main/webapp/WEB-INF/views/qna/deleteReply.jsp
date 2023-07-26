@@ -4,6 +4,6 @@
 <c:set var="root" value="${pageContext.request.contextPath }" />  
 <script>
 	alert("삭제되었습니다");
-	location.href="${root}/qna/detail?qna_idx=${replyQnaBean.parno}&page=${page}";
+	location.href="${root}/qna/detail?qna_idx=${qnaDetailBean.parno}&page=${page}";
 </script>
 

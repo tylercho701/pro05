@@ -15,18 +15,16 @@ public class NoticeDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;	
 	
-//게시글 입력하기
+	//게시글 쓰기
 	public void addNoti(NoticeBean writeNoticeBean){
 		
 		sqlSessionTemplate.insert("notice.addNoti", writeNoticeBean);
 	}
 	
 	// 게시글 리스트 가져오기
-	public List<NoticeBean> getNotiList(RowBounds rowBounds){
-	
-		// System.out.println(sqlSessionTemplate.selectList("notice.getNotiList"));
-		return sqlSessionTemplate.selectList("notice.getNotiList", rowBounds, rowBounds);
+	public List<NoticeBean> getNotiList(RowBounds rowBounds){	
 		
+		return sqlSessionTemplate.selectList("notice.getNotiList", rowBounds, rowBounds);		
 	}
 	
 	// 상세페이지에 출력할 데이터 가져오기
@@ -51,8 +49,5 @@ public class NoticeDAO {
 	public int getNotiCnt() {
 		
 		return sqlSessionTemplate.selectOne("notice.getNotiCnt");
-	}
-
-	
-	
+	}	
 }

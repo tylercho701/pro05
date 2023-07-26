@@ -3,6 +3,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- <c:url var="root" value="/" /> -->
 <!-- localhost(127.0.0.1):portnumber/projectname : Context Path -->
+
+    <head>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="./resources/assets/favicon.ico" />
+        
+        <!-- CSS (includes Bootstrap) -->
+        <link href="${pageContext.request.contextPath}/resources/css/styles.css" rel="stylesheet" />
+
+	</head>
+
 <c:set var="root" value="${pageContext.request.contextPath }/" />
 <%
 	String sid="";
@@ -10,7 +20,6 @@
 		sid = (String) session.getAttribute("sid");
 	}
  %>
-
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container px-5">
 			<img src="${root }resources/images/logo_wh.png" alt="로고"
@@ -33,21 +42,19 @@
 			</div>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    	<c:if test="${empty sid }" >
+            <c:if test="${empty sid }" >
 							<li class="nav-item"><a href="${root}user/login" class="nav-link">로그인</a></li>
 							<li class="nav-item"><a href="${root}user/join" class="nav-link">회원가입</a></li>
-						</c:if>
-                    	
-                    	<c:if test="${sid.equals('admin') }">
-                    		<li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Admin</a></li>
-                    		<li class="nav-item"><a href="${root}user/logout" class="nav-link">로그아웃</a></li>
-                    	</c:if>
-						
+						</c:if>               	
+           	<c:if test="${sid.equals('admin') }">
+           		<li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Admin</a></li>
+           		<li class="nav-item"><a href="${root}user/logout" class="nav-link">로그아웃</a></li>
+           	</c:if>						
 						<c:if test="${!empty sid && !sid.equals('admin') }">
 							<li class="nav-item"><a href="${root}user/modify" class="nav-link">정보수정</a></li>
 							<li class="nav-item"><a href="${root}user/logout" class="nav-link">로그아웃</a></li>
 						</c:if>
-                    </ul>
+        </ul>
 			</div>
 		</div>
 	</nav>

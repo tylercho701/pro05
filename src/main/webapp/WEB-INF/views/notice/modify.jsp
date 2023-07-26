@@ -60,7 +60,7 @@
 						<div class="form-group">
 							<div class="text-right">
 								<form:button class="btn btn-primary">수정완료</form:button>
-								<a href="${root}/notice/detail?notice_idx=${notice_idx}&page=${page}" class="btn btn-info">취소</a>
+								<a href="${root}/notice/detail?noti_idx=${modifyNoticeBean.noti_idx}&page=${page}" class="btn btn-info">취소</a>
 							</div>
 						</div>
 					</form:form>

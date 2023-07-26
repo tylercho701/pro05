@@ -54,10 +54,9 @@
 				</tbody>
 			</table>			
 			<div class="d-none d-md-block">
-				<ul class="pagination justify-content-center">
-					
+				<ul class="pagination justify-content-center">					
 					<c:choose>
-						<c:when test="${pageBean.prevP <= 0}" >
+						<c:when test="${pageBean.currentP <= 10}">
 							<li class="page-item disabled" id="noPage">								
 								<a href="#" class="page-link">이전</a>
 							</li>
@@ -82,8 +81,7 @@
 								</li>
 							</c:otherwise>
 						</c:choose>			
-					</c:forEach>
-								
+					</c:forEach>								
 					<c:choose>
 						<c:when test="${pageBean.max >= pageBean.pageCnt}">
 							<li class="page-item disabled" id="noPage">

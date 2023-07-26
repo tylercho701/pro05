@@ -74,7 +74,7 @@
   --bs-border-radius-2xl: 2rem;
   --bs-border-radius-pill: 50rem;
   --bs-link-color: #0d6efd;
-  --bs-link-hover-color: #0a58ca;
+  --bs-link-hover-color: #dee2e6;
   --bs-code-color: #d63384;
   --bs-highlight-bg: #fff3cd;
 }
@@ -661,9 +661,9 @@ progress {
     max-width: 1140px;
   }
 }
-@media (min-width: 1400px) {
+@media (min-width: 1480px) {
   .container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
-    max-width: 1320px;
+    max-width: 1400px;
   }
 }
 .row {
@@ -3610,7 +3610,7 @@ textarea.form-control-lg {
   --bs-nav-link-font-weight: ;
   --bs-nav-link-color: var(--bs-link-color);
   --bs-nav-link-hover-color: var(--bs-link-hover-color);
-  --bs-nav-link-disabled-color: #6c757d;
+  --bs-nav-link-disabled-color: #dee2e6;
   display: flex;
   flex-wrap: wrap;
   padding-left: 0;
@@ -3619,6 +3619,9 @@ textarea.form-control-lg {
 }
 
 .nav-link {
+  --bs-nav-link-color: var(--bs-link-color);
+  --bs-nav-link-hover-color: var(--bs-link-hover-color);
+  --bs-nav-link-disabled-color: #dee2e6;	
   display: block;
   padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
   font-size: var(--bs-nav-link-font-size);
@@ -3698,6 +3701,8 @@ textarea.form-control-lg {
   background: none;
   border: 0;
   border-radius: var(--bs-nav-pills-border-radius);
+  float: left;
+  padding-right: 40px;
 }
 
 .nav-pills .nav-link:disabled {
@@ -3795,13 +3800,13 @@ textarea.form-control-lg {
   --bs-nav-link-padding-y: 0.5rem;
   --bs-nav-link-font-weight: ;
   --bs-nav-link-color: var(--bs-navbar-color);
-  --bs-nav-link-hover-color: var(--bs-navbar-hover-color);
+  --bs-nav-link-hover-color: var(--bs-link-hover-color);
   --bs-nav-link-disabled-color: var(--bs-navbar-disabled-color);
-  display: flex;
-  flex-direction: column;
-  padding-left: 0;
-  margin-bottom: 0;
-  list-style: none;
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
 }
 .navbar-nav .show > .nav-link,
 .navbar-nav .nav-link.active {
@@ -7761,7 +7766,7 @@ textarea.form-control-lg {
 
 .px-4 {
   padding-right: 1.5rem !important;
-  padding-left: 1.5rem !important;
+  padding-left: 1.5rem !important;  
 }
 
 .px-5 {
@@ -7797,11 +7802,14 @@ textarea.form-control-lg {
 .py-4 {
   padding-top: 1.5rem !important;
   padding-bottom: 1.5rem !important;
+  bottom: 0;
 }
 
 .py-5 {
   padding-top: 3rem !important;
   padding-bottom: 3rem !important;
+  positon: absolute;
+  bottom: 0;
 }
 
 .pt-0 {

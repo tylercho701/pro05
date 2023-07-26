@@ -35,34 +35,30 @@ public class NoticeController {
 	
 	@GetMapping("/main")
 	public String notice(@RequestParam(value="page", defaultValue = "1") int page,
-											 Model model){
+						 Model model){
 						
 		// 게시글 리스트 가져오기
 		List<NoticeBean> notiList = noticeService.getNotiList(page);
 		
 		// DB 로부터 받아온 게시글 리스트(ContentBean 객체들이 저장된 ArrayList 객체)를
 		// requestScope 에 contentList 라는 이름으로 올림
-		model.addAttribute("notiList", notiList);
+		model.addAttribute("notiList", notiList);				
 		
-		
-		// System.out.println("notiList 1 :" + notiList);	
 		PageBean pageBean = noticeService.getNotiCnt(page);
 		model.addAttribute("pageBean", pageBean);
 		model.addAttribute("page", page);
 		
-		// System.out.println("notiList 2 :" + notiList);	
 		return "notice/main";
 	}
 	
 	@GetMapping("/detail")
 	public String noticeDetail(@RequestParam("noti_idx") int noti_idx,
-							@RequestParam("page") int page,	Model model){
+							   @RequestParam("page") int page,	Model model){
 		
 		model.addAttribute("noti_idx", noti_idx);
 		
 		// 상세페이지에 출력할 데이터 가져오기
 		NoticeBean noticeDetailBean = noticeService.getNotiDetail(noti_idx);
-		System.out.println(noticeDetailBean.getNoti_file());
 		model.addAttribute("noticeDetailBean", noticeDetailBean);
 		
 		// SessionScope 에 있는 정보를 loginUserBean 에 넣기
@@ -75,7 +71,7 @@ public class NoticeController {
 	@GetMapping("/write")
 	public String noticeWrite(@ModelAttribute("writeNoticeBean") NoticeBean writeNoticeBean,
 							  @RequestParam("page") int page, Model model){
-		
+				
 		model.addAttribute("page", page);
 				
 		return "notice/write";
@@ -84,9 +80,11 @@ public class NoticeController {
 	// BindingResult는 검증 오류가 발생할 경우 오류 내용을 보관하는 스프링 프레임워크에서 제공하는 객체
 	@PostMapping("/write_procedure")
 	public String writeProcedure(@Valid @ModelAttribute("writeNoticeBean") NoticeBean writeNoticeBean, 
-								 BindingResult result, Model model,
+								 BindingResult result, Model model, 
 								 @RequestParam("page") int page){
-		
+	
+		System.out.println("컨트롤러 : "+writeNoticeBean.getNoti_author());
+
 		model.addAttribute("page", page);
 		if(result.hasErrors()){
 			System.out.println("에러O");

@@ -78,15 +78,30 @@
 	<interceptors>
 		<interceptor>
 			<!-- <mapping path="/user/**"/> -->
-			<mapping path="/restaurant/**"/>
+			<mapping path="/user/modify"/>
+			<mapping path="/user/update_procedure"/>
+			<mapping path="/user/delete"/>
+			<mapping path="/restaurant/**" />
 			<mapping path="/review/**"/>
-			<exclude-mapping path="/restaurant/main"/>
+			<mapping path="/notice/**"/>
+			<mapping path="/qna/**"/>
+			
+			<exclude-mapping path="/notice/main"/>
+			
 			<exclude-mapping path="/user/login"/>
 			<exclude-mapping path="/user/login_fail"/>
 			<exclude-mapping path="/user/login_prodedure"/>
 			<exclude-mapping path="/user/join"/>
 			<exclude-mapping path="/user/join_prodedure"/>
 			<exclude-mapping path="/user/invalidUser"/>
+			
+			<exclude-mapping path="/restaurant/main"/>
+			<exclude-mapping path="/restaurant/restaurantCate"/>
+			<exclude-mapping path="/restaurant/restaurantRegion"/>
+			<exclude-mapping path="/restaurant/restaurantFood"/>
+			
+			<exclude-mapping path="/qna/main"/>
+
 			<beans:bean class="com.matjip.interceptor.UserInterceptor" />
 		</interceptor>
 		<interceptor>

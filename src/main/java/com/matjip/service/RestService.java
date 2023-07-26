@@ -1,6 +1,7 @@
 package com.matjip.service;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -101,7 +102,31 @@ public class RestService {
 		// System.out.println("restList 서비스 :" + restDAO.getRestList());
 		return restDAO.getRestList(rowBounds);
 	}
+	
+	//게시글 리스트(지역별) 가져오기
+	public List<RestBean> getRestListRegion(int page, String rs_region_cate){
+					
+		int start = (page - 1) * pageListcnt;
+		RowBounds rowBounds = new RowBounds(start, pageListcnt);
+		return restDAO.getRestListRegion(rs_region_cate, rowBounds);
+	}
 
+	//게시글 리스트(음식별) 가져오기
+	public List<RestBean> getRestListFood(int page, String rs_food_cate){
+					
+		int start = (page - 1) * pageListcnt;
+		RowBounds rowBounds = new RowBounds(start, pageListcnt);
+		return restDAO.getRestListFood(rs_food_cate, rowBounds);
+	}	
+	
+	//게시글 리스트(지역.음식별) 가져오기
+	public List<RestBean> getRestListCate(int page, HashMap<String, String> cateMap){
+					
+		int start = (page - 1) * pageListcnt;
+		RowBounds rowBounds = new RowBounds(start, pageListcnt);
+		return restDAO.getRestListCate(cateMap, rowBounds);
+	}
+		
 	// 상세페이지에 출력할 데이터 가져오기
 	public RestBean getRestDetail(int rs_idx) {
 
@@ -137,6 +162,39 @@ public class RestService {
 		// System.out.println(pageListcnt);
 		return pageBean;
 	}
+	
+	// 게시글 지역별 개수 가져오기	
+	public PageBean getRestRegionCnt(int currentP, String rs_region_cate ) {
+	
+		int restCnt = restDAO.getRestRegionCnt(rs_region_cate);
+		System.out.println("restCnt : "+ restCnt);
+		PageBean pageBean = new PageBean(restCnt, currentP, pageListcnt, pagePaginationcnt);
+	
+		// System.out.println(pageListcnt);
+		return pageBean;
+	}
+	
+	// 게시글 음식별 개수 가져오기	
+	public PageBean getRestFoodCnt(int currentP, String rs_food_cate) {
+
+		int restCnt = restDAO.getRestFoodCnt(rs_food_cate);
+
+		PageBean pageBean = new PageBean(restCnt, currentP, pageListcnt, pagePaginationcnt);
+
+		// System.out.println(pageListcnt);
+		return pageBean;
+	}
+	
+	// 게시글 지역.음식별 개수 가져오기	
+	public PageBean getRestCateCnt(int currentP, HashMap<String, String> cateMap) {
+
+		int restCnt = restDAO.getRestCateCnt(cateMap);
+		
+		PageBean pageBean = new PageBean(restCnt, currentP, pageListcnt, pagePaginationcnt);
+
+		// System.out.println(pageListcnt);
+		return pageBean;
+	}
 
 	// 게시글 삭제하기
 	public void deleteRestInfo(int rs_idx) {
@@ -151,15 +209,8 @@ public class RestService {
 	public List<RegionBean> getRegionTable() {
 		return restDAO.getRegionTable();
 	}
-	
-	public List<RestBean> getFilteredRestList_A(RestBean filteredRestBean){
-		return restDAO.getFilteredRestList_A(filteredRestBean);
-	}
-	public List<RestBean> getFilteredRestList_R(RestBean filteredRestBean){
-		return restDAO.getFilteredRestList_R(filteredRestBean);
-	}
-	public List<RestBean> getFilteredRestList_F(RestBean filteredRestBean){
-		return restDAO.getFilteredRestList_F(filteredRestBean);
-	}
 
+	public List<RestBean> getRestTop3(){
+		return restDAO.getRestTop3();
+	}
 }

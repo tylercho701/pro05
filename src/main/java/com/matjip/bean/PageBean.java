@@ -47,7 +47,7 @@ public class PageBean {
 //		20 ~ 29 : 21,	30
 //		페이지 버튼 개수(paginationCnt)
 		
-		this.min = ((currentP - 1) / contentPageCnt) * contentPageCnt +1;
+		this.min = ((currentP - 1) / paginationCnt) * paginationCnt +1;
 		this.max = min + paginationCnt - 1 ;
 		
 //		전체 페이지 개수(pageCnt)
@@ -56,9 +56,12 @@ public class PageBean {
 			this.max = pageCnt;
 		}
 		
-		prevP = min - 1;
-		nextP = max + 1;
+		this.prevP = min - 1;
+		if(prevP < 1) {
+			prevP = 1;
+		}
 		
+		this.nextP = max + 1;
 		if(nextP > pageCnt) {
 			nextP = pageCnt;
 		}

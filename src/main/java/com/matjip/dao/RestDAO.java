@@ -1,5 +1,6 @@
 package com.matjip.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
@@ -19,11 +20,28 @@ public class RestDAO {
 
 	// 게시글 리스트 가져오기
 	public List<RestBean> getRestList(RowBounds rowBounds) {
-		// System.out.println("restList 다오 :" +
-		// sqlSessionTemplate.selectList("restaurant.getRestList").toString());
+	
 		return sqlSessionTemplate.selectList("restaurant.getRestList", rowBounds, rowBounds);
 	}
+		
+	//게시글 리스트 (지역별)가져오기
+	public List<RestBean> getRestListRegion(String rs_region_cate, RowBounds rowBounds) {
+		
+		return sqlSessionTemplate.selectList("restaurant.getRestListRegion", rs_region_cate, rowBounds);
+	}
 
+	//게시글 리스트 (음식별)가져오기
+	public List<RestBean> getRestListFood(String rs_food_cate, RowBounds rowBounds) {
+					
+		return sqlSessionTemplate.selectList("restaurant.getRestListFood", rs_food_cate, rowBounds);
+	}	
+	
+	//게시글 리스트 (지역별.음식별)가져오기
+	public List<RestBean> getRestListCate(HashMap<String, String> cateMap, RowBounds rowBounds) {
+					
+		return sqlSessionTemplate.selectList("restaurant.getRestListCate", cateMap, rowBounds);
+	}
+	
 	// 상세페이지에 출력할 데이터 가져오기
 	public RestBean getRestDetail(int rs_idx) {
 
@@ -40,6 +58,24 @@ public class RestDAO {
 	public int getRestCnt() {
 
 		return sqlSessionTemplate.selectOne("restaurant.getRestCnt");
+	}
+	
+	// 게시글 지역별 개수 가져오기
+	public int getRestRegionCnt(String rs_region_cate) {
+
+		return sqlSessionTemplate.selectOne("restaurant.getRestRegionCnt", rs_region_cate);
+	}
+	
+	// 게시글 음식별 개수 가져오기
+	public int getRestFoodCnt(String rs_food_cate) {
+
+		return sqlSessionTemplate.selectOne("restaurant.getRestFoodCnt", rs_food_cate);
+	}
+	
+	// 게시글 지역.음식별 개수 가져오기
+	public int getRestCateCnt(HashMap<String, String> cateMap) {
+
+		return sqlSessionTemplate.selectOne("restaurant.getRestCateCnt", cateMap);
 	}
 
 	// 수정페이지에서 게시글 수정하기
@@ -62,14 +98,8 @@ public class RestDAO {
 		return sqlSessionTemplate.selectList("restaurant.getRegionTable");
 	}
 	
-	public List<RestBean> getFilteredRestList_A(RestBean filteredRestBean){
-		return sqlSessionTemplate.selectList("restaurant.getFilteredRestList_A", filteredRestBean);
-	}
-	public List<RestBean> getFilteredRestList_R(RestBean filteredRestBean){
-		return sqlSessionTemplate.selectList("restaurant.getFilteredRestList_R", filteredRestBean);
-	}
-	public List<RestBean> getFilteredRestList_F(RestBean filteredRestBean){
-		return sqlSessionTemplate.selectList("restaurant.getFilteredRestList_F", filteredRestBean);
+	public List<RestBean> getRestTop3(){
+		return sqlSessionTemplate.selectList("restaurant.getRestTop3");
 	}
 
 }
