@@ -141,11 +141,11 @@
 	
 	<select id="getRestTop3" resultType="com.matjip.bean.RestBean">
 		<![CDATA[
-			select * from(select r.rs_idx, rs.rs_name, rs.rs_content, rs.rs_addr, 
+			select * from(select r.rs_idx, rs.rs_name, rs.rs_content, rs.rs_addr, rs.rs_file,
 						  round(avg(nvl(r.rev_score, 0)), 2) as average 
 						  from review r, restaurant rs 
 						  where r.rs_idx = rs.rs_idx 
-						  group by r.rs_idx, rs.rs_name, rs.rs_addr, rs.rs_content 
+						  group by r.rs_idx, rs.rs_name, rs.rs_addr, rs.rs_content, rs.rs_file 
 						  order by average desc) 
 						  where rownum <= 3
 		]]>

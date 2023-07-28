@@ -43,8 +43,8 @@
 		
 		<![CDATA[
 			
-			Insert INTO qna VALUES(#{qna_idx}, #{qna_title},
-			#{qna_content}, #{qna_id}, sysdate, #{lev}, #{parno}, default)
+			Insert INTO qna VALUES(#{qna_idx}, DEFAULT,
+			#{qna_content}, #{qna_id}, sysdate, 2, #{parno}, default)
 				
 		]]>	
 			

@@ -12,11 +12,29 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Jeju Matzip_Join</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="${root }resources/assets/favicon.ico" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="${root }resources/css/styles.css" rel="stylesheet" />
         <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/js/color-modes.js"></script>
+                
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="./resources/assets/favicon.ico" />
+        
+        <!-- CSS (includes Bootstrap) -->
+        <link href="${pageContext.request.contextPath}/resources/css/styles.css" rel="stylesheet" />
+	    	    
+	    <!-- Custom styles for this template -->
+	    <!--<link href="${pageContext.request.contextPath}/resources/css/product.css" rel="stylesheet">-->
+    	<link href="${pageContext.request.contextPath}/resources/css/carousel.css" rel="stylesheet">
+    	
+	<style>
+	.container-wrap {
+		margin-top: 120px;
+		position: relative;
+		min-height: 100%;
+	    padding-bottom: 250px;
+		bottom:0px;
+	}
+	</style>
+	
     </head>
     <script>
     function checkUserIdExist(){
@@ -69,8 +87,9 @@
     <body>
         <!-- TOP MENU - Responsive navbar-->
         <c:import url="/WEB-INF/views/include/top_menu.jsp" />
+        
         <!-- Page Content-->
-        <div class="container px-4 px-lg-5">
+		<div class="container" style="margin-top:100px; height: 545px;">
             <!-- Heading Row-->
             <div class="row gx-4 gx-lg-5 align-items-center my-5">
                 <div class="col-lg-3"></div>

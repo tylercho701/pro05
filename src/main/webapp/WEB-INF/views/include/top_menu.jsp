@@ -35,7 +35,6 @@
 			<div class="navbar navbar-expand-lg">
 				<ul class="nav nav-pills">
 					<li class="nav-item"><a class="nav-link" href="${root }restaurant/main">맛집리스트</a></li>
-					<li class="nav-item"><a class="nav-link" href="${root }review/main">리뷰</a></li>
 					<li class="nav-item"><a class="nav-link" href="${root }notice/main">공지사항</a></li>
 					<li class="nav-item"><a class="nav-link" href="${root }qna/main">QnA</a></li>
 				</ul>
@@ -51,6 +50,7 @@
            		<li class="nav-item"><a href="${root}user/logout" class="nav-link">로그아웃</a></li>
            	</c:if>						
 						<c:if test="${!empty sid && !sid.equals('admin') }">
+							<li class="nav-item"><a class="nav-link" href="${root }review/main">나의 리뷰</a></li>
 							<li class="nav-item"><a href="${root}user/modify" class="nav-link">정보수정</a></li>
 							<li class="nav-item"><a href="${root}user/logout" class="nav-link">로그아웃</a></li>
 						</c:if>

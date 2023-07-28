@@ -7,16 +7,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>리뷰 업데이트</title>
-	<!-- Bootstrap CDN -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>리뷰 업데이트</title>
+                
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="./resources/assets/favicon.ico" />
+        
+        <!-- CSS (includes Bootstrap) -->
+        <link href="${pageContext.request.contextPath}/resources/css/styles.css" rel="stylesheet" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>	  
+		  	    
+	    <!-- Custom styles for this template -->
+	    <!--<link href="${pageContext.request.contextPath}/resources/css/product.css" rel="stylesheet">-->
+    	<link href="${pageContext.request.contextPath}/resources/css/carousel.css" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/js/color-modes.js"></script>
+	
 	<style>
-	#noPage {display:none;}
+		.container-wrap {
+			margin-top: 120px;
+			position: relative;
+			min-height: 100%;
+		    padding-bottom: 250px;
+			bottom:0px;
+		}
+		
+		.shadow {
+			width: 1000px;
+			text-align: center;
+			display: flex;
+			margin: 0 auto;
+		}
 	</style>
 </head>
 <body>
@@ -29,6 +55,7 @@
 				<div class="card shadow">
 					<div class="card-body">
 						<div class="form-group">
+							<h3 class="text-center card-title"><strong>My Review Update</strong></h3>
 							<form:form action="/review/updateReview" method="post" modelAttribute="reviewBean" enctype="multipart/form-data" >
 								<form:hidden path="rev_idx" />
 								<form:hidden path="rs_idx"/>
@@ -63,9 +90,9 @@
 								
 								<div class="form-group">
 									<div class="text-right">
-										<form:button type="submit" class="btn btn-info">업데이트</form:button>
+										<form:button type="submit" class="btn btn-light">업데이트</form:button>
 										<form:button type="reset" class="btn btn-danger">초기화</form:button>
-										<a href="javascript:history.go(-1)" class="btn btn-info">뒤로가기</a>
+										<a href="javascript:history.go(-1)" class="btn btn-dark">뒤로가기</a>
 									</div>
 								</div>
 							</form:form>

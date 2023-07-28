@@ -9,28 +9,55 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>리스트 상세보기</title>
-<!-- Bootstrap CDN -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-<style>
-#noPage {display:none;}
-</style>
+
+        <title>맛집 리스트 상세보기</title>
+                
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="./resources/assets/favicon.ico" />
+        
+        <!-- CSS (includes Bootstrap) -->
+        <link href="${pageContext.request.contextPath}/resources/css/styles.css" rel="stylesheet" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>	  
+		  	    
+	    <!-- Custom styles for this template -->
+	    <!--<link href="${pageContext.request.contextPath}/resources/css/product.css" rel="stylesheet">-->
+    	<link href="${pageContext.request.contextPath}/resources/css/carousel.css" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/js/color-modes.js"></script>
+	
+	<style>
+		.container-wrap {
+			margin-top: 120px;
+			position: relative;
+			min-height: 100%;
+		    padding-bottom: 250px;
+			bottom:0px;
+		}
+		
+		.shadow {
+			width: 1000px;
+			text-align: center;
+			display: flex;
+			margin: 0 auto;
+		}
+	</style>
 </head>
 <body>
 
 <!-- Header -->
 <c:import url="/WEB-INF/views/include/top_menu.jsp"></c:import>	
 
-<div class="container" style="margin-top:50px; margin-bottom:50px;">
+<div class="container" style="margin-top:100px; height: auto;">
 	<div class="row">
 		<!-- <div class="col-sm-3"></div> -->
-		<div class="col-sm-6">
+		<div class="col-sm-12">
 			<div class="card shadow">
-				<div class="card-body">
+				<div class="card-body" style="text-align: left;">
 					<div class="form-group">
+					<h3 class="text-center card-title"><strong>맛집 리스트 상세보기</strong></h3>
 						<label for="rs_idx">글 번호</label>
 						<input type="text" id="rs_idx" name="rs_idx" class="form-control" value="${restDetailBean.rs_idx }" disabled="disabled"/>
 					</div>
@@ -66,49 +93,63 @@
 					</c:if>
 					<div class="form-group">
 						<div class="text-right">
-							<a href="${root}/restaurant/main?page=${page}" class="btn btn-primary">목록보기</a>
-							<a href="${root}/restaurant/modify?rs_idx=${rs_idx}&page=${page}" class="btn btn-info">수정하기</a>
-							<a href="${root}/restaurant/delete?rs_idx=${rs_idx}&page=${page}" class="btn btn-danger">삭제하기</a>
+							<a href="${root}/restaurant/main?page=${page}" class="btn btn-secondary">목록보기</a>
+							<c:if test="${sid == 'admin'}">
+		                    	<a href="${root}/restaurant/modify?rs_idx=${rs_idx}&page=${page}" class="btn btn-warning">수정하기</a>
+		                    	<a href="${root}/restaurant/delete?rs_idx=${rs_idx}&page=${page}" class="btn btn-danger">삭제하기</a>
+		                    </c:if>
 							<%-- <c:if test="${loginUserBean.user_id == noticeDetailBean.user_id }"></c:if> --%>
 						</div>
 					</div>					
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-6">
+		<div class="col-sm-12" style="margin-top: 20px;">
 			<div class="card shadow">
 				<div class="card-body">
-					<h2>${restDetailBean.rs_name } 의 후기</h2>
-					<div class="form-group">
-						<c:forEach items="${reviewList }" var="review" varStatus="status">
-							<h4>${review.rev_title }</h4><!-- 제목 -->
+					<h3 style="margin-bottom: 30px;"><strong>${restDetailBean.rs_name } 의 후기</strong></h3>
+					<table class="table table-hover" id='맛집리스트 상세 후기' style="width=100%">
+						<tbody>
+							<tr class="exline" style="border-bottom: 2px solid #ddd;">
+							<th class="text-center d-none d-md-table-cell">제목</th>
+							<th class="text-center d-none d-md-table-cell">별점</th>
+							<th class="text-center d-none d-md-table-cell">리뷰어</th>
+							<th class="text-center d-none d-md-table-cell">이미지</th>
+							<th class="text-center d-none d-md-table-cell">내용</th>
+							<th class="text-center d-none d-md-table-cell">작성일</th>
+							<th class="text-center d-none d-md-table-cell"></th>
+							<tr>
+							<c:forEach items="${reviewList }" var="review" varStatus="status"></th>
+							<th class="text-center d-none d-md-table-cell">${review.rev_title }</th><!-- 제목 -->
+							<th>
 							<!-- 별점 -->
-							<c:choose>
-								<c:when test="${review.rev_score eq 5 }"><h4>★★★★★</h4></c:when>
-								<c:when test="${review.rev_score eq 4 }"><h4>★★★★</h4></c:when>
-								<c:when test="${review.rev_score eq 3 }"><h4>★★★</h4></c:when>
-								<c:when test="${review.rev_score eq 2 }"><h4>★★</h4></c:when>
-								<c:otherwise><h4>★</h4></c:otherwise>
-							</c:choose>
-							<h4>${review.rev_id }</h4><!-- 리뷰어 -->
-							<c:if test="${!empty review.rev_file }"><!-- 이미지 -->
+								<h7>
+									<c:forEach begin="1" end="${review.rev_score }" step="1">★</c:forEach>
+                     			</h7>
+							</th>
+							<th class="text-center d-none d-md-table-cell">${review.rev_id }</th><!-- 리뷰어 -->
+							<th class="text-center d-none d-md-table-cell"><c:if test="${!empty review.rev_file }"><!-- 이미지 -->
 								<img src="${root }/resources/upload/${review.rev_file }" alt="${review.rev_file }" width="30%" id="img1" onclick="imgPop('${review.rev_file }')">
-							</c:if>
-							<h4>${review.rev_content }</h4><!-- 후기내용 -->
-							<h5>${review.rev_regdate }</h5><!-- 작성일 -->
-							<div class="text-right">
-								<!-- 수정 삭제 -->
+							</c:if></th>
+							<th class="text-center d-none d-md-table-cell h6">${review.rev_content }</th><!-- 후기내용 -->
+							<th class="text-center w-25 h6">${review.rev_regdate }</th><!-- 작성일 -->
+							<th class="text-right">
+							<!-- 수정 삭제 -->
 								<c:if test="${review.rev_id.equals(sid) }">
-									<a href="/review/updateReview?rev_idx=${review.rev_idx }&page=${page}&revPage=${revPageBean.currentP}" class="btn btn-info">리뷰 수정하기</a>
-									<a href="/review/deleteReview?rev_idx=${review.rev_idx }&rs_idx=${review.rs_idx }&page=${page}&revPage=${revPageBean.currentP}" class="btn btn-danger">리뷰 삭제하기</a>
+									<a href="/review/updateReview?rev_idx=${review.rev_idx }&page=${page}&revPage=${revPageBean.currentP}" class="btn btn-outline-danger" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">수정</a>
+									<a href="/review/deleteReview?rev_idx=${review.rev_idx }&rs_idx=${review.rs_idx }&page=${page}&revPage=${revPageBean.currentP}" class="btn btn-outline-danger" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">삭제</a>
 								</c:if>
-							</div>
+							</th>
+							</tr>
 							<c:if test="${!status.last }">
-							<h5>----------------------------------</h5>
 							</c:if>
-						</c:forEach>
+							</c:forEach>
+							</tr>
+						  </tbody>						
+						</table>
+						<!-- 리뷰 작성하기 -->
 						<div class="text-right">
-							<a href="/review/insertReview?rs_idx=${rs_idx }&page=${page}" class="btn btn-primary">리뷰 작성하기</a>
+							<a href="/review/insertReview?rs_idx=${rs_idx }&page=${page}" class="btn btn-secondary">리뷰 작성하기</a>
 						</div>
 					</div>
 					<div class="d-none d-md-block">

@@ -8,18 +8,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>미니 프로젝트</title>
-<!-- Bootstrap CDN -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+        <title>맛집 리스트 상세수정</title>
+                
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="./resources/assets/favicon.ico" />
+        
+        <!-- CSS (includes Bootstrap) -->
+        <link href="${pageContext.request.contextPath}/resources/css/styles.css" rel="stylesheet" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>	  
+		  	    
+	    <!-- Custom styles for this template -->
+	    <!--<link href="${pageContext.request.contextPath}/resources/css/product.css" rel="stylesheet">-->
+    	<link href="${pageContext.request.contextPath}/resources/css/carousel.css" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/js/color-modes.js"></script>
+
+	</style>
 </head>
 <body>
 
 <!-- Header -->
 <c:import url="/WEB-INF/views/include/top_menu.jsp"></c:import>	
-
+<!-- restaurant/modify -->
 <div class="container" style="margin-top:100px">
 	<div class="row">
 		<div class="col-sm-3"></div>
@@ -30,6 +44,7 @@
 						<form:hidden path="rs_idx" />
 						<input type="hidden" name="page" value="${page }"/>
 						<div class="form-group">
+						<h3 class="text-center card-title"><strong>맛집 리스트 상세수정</strong></h3>
 							<form:label path="rs_name">이름</form:label>
 							<form:input path="rs_name" class="form-control"/>
 						</div>
@@ -73,8 +88,8 @@
 						</div>
 						<div class="form-group">
 							<div class="text-right">
-								<form:button class="btn btn-primary">수정완료</form:button>
-								<a href="${root }restaurant/detail?rs_idx=${rs_idx }&page=${page } " class="btn btn-info">취소</a>
+								<form:button class="btn btn-warning">수정완료</form:button>
+								<a href="${root }restaurant/detail?rs_idx=${rs_idx }&page=${page } " class="btn btn-danger">취소</a>
 							</div>
 						</div>
 					</form:form>

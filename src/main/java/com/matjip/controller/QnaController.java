@@ -51,7 +51,8 @@ public class QnaController {
 	}
 	
 	@GetMapping("/detail")
-	public String qnaDetail(@RequestParam("qna_idx") int qna_idx,
+	public String qnaDetail(@ModelAttribute("replyQnaBean") QnaBean replyQnaBean,
+							@RequestParam("qna_idx") int qna_idx,
 							@RequestParam("page") int page,	Model model){
 		
 		model.addAttribute("qna_idx", qna_idx);

@@ -75,7 +75,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/join_procedure")
-	public String joinProcedure(@ModelAttribute("joinUserBean") UserBean joinUserBean,
+	public String joinProcedure(@Valid @ModelAttribute("joinUserBean") UserBean joinUserBean,
 								Model model, BindingResult result) {
 		
 		
@@ -106,7 +106,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/update_procedure")
-	public String updateProcedure(@ModelAttribute("loggedUserInfo") UserBean loggedUserInfo,
+	public String updateProcedure(@Valid @ModelAttribute("loggedUserInfo") UserBean loggedUserInfo,
 								  HttpServletRequest request, BindingResult result) {
 		
 		if(result.hasErrors()) {

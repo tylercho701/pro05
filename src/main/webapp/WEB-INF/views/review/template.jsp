@@ -8,19 +8,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>리뷰 상세보기</title>
-<!-- Bootstrap CDN -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-<style>
-#noPage {display:none;}
-</style>
+
+        <title>리뷰 상세보기</title>
+                
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="./resources/assets/favicon.ico" />
+        
+        <!-- CSS (includes Bootstrap) -->
+        <link href="${pageContext.request.contextPath}/resources/css/styles.css" rel="stylesheet" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>	  
+		  	    
+	    <!-- Custom styles for this template -->
+	    <!--<link href="${pageContext.request.contextPath}/resources/css/product.css" rel="stylesheet">-->
+    	<link href="${pageContext.request.contextPath}/resources/css/carousel.css" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/js/color-modes.js"></script>
+	
 </head>
 <body>
 
-	<c:import url="${root }/WEB-INF/views/include/top_menu.jsp" />
+	<c:import url="/WEB-INF/views/include/top_menu.jsp" />
 	
 	<div class="container" style="margin-top:100px">
 		<div class="row">
@@ -29,6 +39,7 @@
 				<div class="card shadow">
 					<div class="card-body">
 						<div class="form-group">
+						<h3 class="text-center card-title"><strong>내가 작성한 리뷰 상세보기</strong></h3>
 							<label for="rs_name">가게명</label>
 							<input type="text" id="rs_name" name="rs_name" class="form-control" value="${reviewBean.rs_name }" disabled="disabled"/>
 						</div>
@@ -64,8 +75,8 @@
 						</c:if>	
 						<div class="form-group">
 							<div class="text-right">
-								<a href="${root}/review/main?myPage=${myPage}" class="btn btn-primary">내 리뷰 목록 보기</a>
-								<a href="${root}/review/updateReview?rev_idx=${reviewBean.rev_idx}&myPage=${myPage}" class="btn btn-info">수정하기</a>
+								<a href="${root}/review/main?myPage=${myPage}" class="btn btn-secondary">내 리뷰 목록 보기</a>
+								<a href="${root}/review/updateReview?rev_idx=${reviewBean.rev_idx}&myPage=${myPage}" class="btn btn-warning">수정하기</a>
 								<a href="${root}/review/deleteReview?rev_idx=${reviewBean.rev_idx}&myPage=${myPage}" class="btn btn-danger">삭제하기</a>
 							</div>
 						</div>
@@ -81,7 +92,7 @@
 		}
 	</script>
 
-	<c:import url="${root }/WEB-INF/views/include/bottom_menu.jsp" />
+	<c:import url="/WEB-INF/views/include/bottom_menu.jsp" />
 	<!-- Bootstrap core JS-->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 	<!-- Core theme JS-->

@@ -31,7 +31,37 @@
 				return false;
 			}
 		}
-  
+      const regExpS = /[!?@#$%^&*():;+-=~{}<>\_\[\]\|\\\"\'\,\.\/\`\₩]/g;
+      const regExpK = /[ㄱ-ㅎㅏ-ㅣ가-힣]/g;
+      const regExpN = /[0-9]/g;
+      const regExpE = /[a-zA-Z]/g;
+      
+      //   이름 제약 조건
+      if(regExpK.test(f.user_name) && f.user_name.length === 2){
+         return true;
+      } else {
+         alert("이름은 한글 2자 이상 입력하세요.")
+         f.user_name.focus()
+         return false;
+      }
+      if(regExpS.test(f.user_name)){
+         alert("이름에는 특수문자가 포함될 수 없습니다.")
+         f.user_name.focus()
+         return false;
+      } else {
+         return true;
+      }
+      
+   }
+   function yesOrNo(){
+      if(confirm("회원 탈퇴 시 작성한 모든 게시물이 삭제됩니다. 계속 진행하시겠습니까 ?")){
+         location.href="${root }user/delete?user_id=${loggedUserInfo.user_id }";
+         return true;
+      } else {
+         alert("회원 탈퇴가 취소 되었습니다.")
+         return false;
+      }
+   }
 </script>
     <body>
         <!-- TOP MENU - Responsive navbar-->
@@ -79,7 +109,7 @@
 						<div class="form-group">
 							<div class="text-right">
 								<form:button class="btn btn-primary">정보수정</form:button>
-								<a href="${root }user/delete?user_id=${loggedUserInfo.user_id }" class="btn btn-danger">회원탈퇴</a>
+								<span class="btn btn-danger" onclick="yesOrNo()">회원탈퇴</span>
 							</div>
 						</div>
 					</form:form>

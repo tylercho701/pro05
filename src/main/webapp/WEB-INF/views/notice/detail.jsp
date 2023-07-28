@@ -10,12 +10,41 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>공지사항 글 상세보기</title>
-<!-- Bootstrap CDN -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+        <title>공지사항 글 상세보기</title>
+                
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="./resources/assets/favicon.ico" />
+        
+        <!-- CSS (includes Bootstrap) -->
+        <link href="${pageContext.request.contextPath}/resources/css/styles.css" rel="stylesheet" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>	  
+		  	    
+	    <!-- Custom styles for this template -->
+	    <!--<link href="${pageContext.request.contextPath}/resources/css/product.css" rel="stylesheet">-->
+    	<link href="${pageContext.request.contextPath}/resources/css/carousel.css" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/js/color-modes.js"></script>
+        
+	<style>
+	.container-wrap {
+		margin-top: 120px;
+		position: relative;
+		min-height: 100%;
+	    padding-bottom: 250px;
+		bottom:0px;
+	}
+	
+	.shadow {
+		width: 1000px;
+		display: flex;
+		margin: 0 auto;
+	}
+	</style>
+	
 </head>
 <body>
 
@@ -24,11 +53,11 @@
 
 <div class="container" style="margin-top:100px">
 	<div class="row">
-		<div class="col-sm-3"></div>
-		<div class="col-sm-6">
+		<div class="col-sm-12">
 			<div class="card shadow">
 				<div class="card-body">
 					<div class="form-group">
+					<h3 class="text-center card-title"><strong>공지사항 상세보기</strong></h3>
 						<label for="noti_idx">글 번호</label>
 						<input type="text" id="noti_idx" name="noti_idx" class="form-control" value="${noticeDetailBean.noti_idx }" disabled="disabled"/>
 					</div>					
@@ -56,9 +85,9 @@
 					</c:if>					
 					<div class="form-group">
 						<div class="text-right">
-							<a href="${root}/notice/main?page=${page}" class="btn btn-primary">목록보기</a>						 	
+							<a href="${root}/notice/main?page=${page}" class="btn btn-secondary">목록보기</a>						 	
 						 	<c:if test="${sid == 'admin'}">
-								<a href="${root}/notice/modify?noti_idx=${noti_idx}&page=${page}" class="btn btn-info">수정하기</a>
+								<a href="${root}/notice/modify?noti_idx=${noti_idx}&page=${page}" class="btn btn-warning">수정하기</a>
 								<a href="${root}/notice/delete?noti_idx=${noti_idx}&page=${page}" class="btn btn-danger">삭제하기</a>
 							</c:if>
 						</div>

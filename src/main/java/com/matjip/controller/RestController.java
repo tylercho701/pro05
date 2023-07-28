@@ -145,7 +145,7 @@ public class RestController {
 					
 	@GetMapping("/detail")
 	public String restDetail(@RequestParam("rs_idx") int rs_idx,
-							 @RequestParam("page") int page, 
+							 @RequestParam(value="page", defaultValue="1") int page, 
 							 @RequestParam(value="revPage", defaultValue="1") int revPage,							 
 							 HttpServletRequest request, Model model) {
 		

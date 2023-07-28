@@ -25,11 +25,6 @@ public class NoticeService{
 	@Autowired
 	private NoticeDAO noticeDAO;
 	
-	// Session Scope 에 있는 UserBean 객체 주입받아야함
-	@Resource(name = "loginUserBean")
-	@Lazy
-	private UserBean loginUserBean;
-	
 	// 파일 업로드 경로
 	@Value("${path.upload}")
 	private String pathUpload;

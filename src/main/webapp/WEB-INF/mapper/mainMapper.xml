@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="main">
+	<!-- food_cate 불러오기 -->
+	<select id="getFoodCate" resultType="java.lang.String">
+		<![CDATA[
+			select food_cate from food order by food_cate
+		]]>
+	</select>
+	<!-- region_cate 불러오기 -->
+	<select id="getRegionCate" resultType="java.lang.String">
+		<![CDATA[
+			select region_cate from region order by region_cate
+		]]>
+	</select>
+	<!-- 지역, 음식종류별 최신 레스토랑 리스트 top5 가져오기 -->
+	<select id="getRecentRestList" parameterType="com.matjip.bean.CateBean" resultType="com.matjip.bean.RestBean">
+		<![CDATA[
+			select * from (select * from restaurant where rs_food_cate = #{rs_food_cate} and rs_region_cate = #{rs_region_cate} order by rs_idx desc) where rownum <= 5
+		]]>
+	</select>
+</mapper>

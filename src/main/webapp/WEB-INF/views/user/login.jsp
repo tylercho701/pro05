@@ -12,16 +12,29 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Jeju Matzip_Login</title>
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/js/color-modes.js"></script>
+                
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="${root }resources/assets/favicon.ico" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="${root }resources/css/styles.css" rel="stylesheet" />
+        <link rel="icon" type="image/x-icon" href="./resources/assets/favicon.ico" />
+        
+        <!-- CSS (includes Bootstrap) -->
+        <link href="${pageContext.request.contextPath}/resources/css/styles.css" rel="stylesheet" />
+	    	    
+	    <!-- Custom styles for this template -->
+	    <!--<link href="${pageContext.request.contextPath}/resources/css/product.css" rel="stylesheet">-->
+    	<link href="${pageContext.request.contextPath}/resources/css/carousel.css" rel="stylesheet">
+
+	<style>
+	</style>
     </head>
+    	
     <body>
         <!-- TOP MENU - Responsive navbar-->
         <c:import url="/WEB-INF/views/include/top_menu.jsp" />
+        
         <!-- Page Content-->
-        <div class="container px-4 px-lg-5">
+		<div class="container" style="margin-top:230px; height: 430px; ">
             <!-- Heading Row-->
             <div class="row gx-4 gx-lg-5 align-items-center my-5">
                 <div class="col-lg-3"></div>
