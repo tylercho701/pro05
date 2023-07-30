@@ -1,5 +1,7 @@
 package com.matjip.bean;
 
+import javax.validation.constraints.NotBlank;
+
 import lombok.Data;
 
 @Data
@@ -9,6 +11,7 @@ public class QnaBean {
 	
 	private String qna_title;
 	
+	@NotBlank
 	private String qna_content;
 		
 	private String qna_id;

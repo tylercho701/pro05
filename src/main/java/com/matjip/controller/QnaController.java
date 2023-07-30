@@ -138,7 +138,25 @@ public class QnaController {
 			System.out.println("에러O");
 			System.out.println(result.getAllErrors());
 			
-			return "qna/qnaReply";
+			model.addAttribute("qna_idx", qna_idx);
+			
+			// 게시글 리스트 가져오기
+			List<QnaBean> qnaReplyList = qnaService.getQnaReplyList(page);
+			
+			// DB 로부터 받아온 게시글 리스트(ContentBean 객체들이 저장된 ArrayList 객체)를
+			// requestScope 에 contentList 라는 이름으로 올림
+			model.addAttribute("qnaReplyList", qnaReplyList);		
+						
+			// 상세페이지에 출력할 데이터 가져오기
+			QnaBean qnaDetailBean = qnaService.getQnaDetail(qna_idx);
+			model.addAttribute("qnaDetailBean", qnaDetailBean);
+			
+			// SessionScope 에 있는 정보를 loginUserBean 에 넣기
+			// model.addAttribute("loginUserBean", loginUserBean);
+			
+			model.addAttribute("page", page);
+			
+			return "qna/detail";
 		}
 			
 			qnaService.addQnaReply(replyQnaBean);

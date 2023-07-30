@@ -5,7 +5,7 @@
 
     <head>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="./resources/assets/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath }/resources/assets/favicon.ico" />
         
         <!-- CSS (includes Bootstrap) -->
         <link href="${pageContext.request.contextPath}/resources/css/styles.css" rel="stylesheet" />

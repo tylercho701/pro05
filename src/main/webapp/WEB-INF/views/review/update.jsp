@@ -28,22 +28,6 @@
         <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src="${pageContext.request.contextPath}/resources/js/color-modes.js"></script>
 	
-	<style>
-		.container-wrap {
-			margin-top: 120px;
-			position: relative;
-			min-height: 100%;
-		    padding-bottom: 250px;
-			bottom:0px;
-		}
-		
-		.shadow {
-			width: 1000px;
-			text-align: center;
-			display: flex;
-			margin: 0 auto;
-		}
-	</style>
 </head>
 <body>
 	<c:import url="${root }/WEB-INF/views/include/top_menu.jsp" />
