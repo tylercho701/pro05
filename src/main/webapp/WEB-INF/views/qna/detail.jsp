@@ -36,8 +36,8 @@
 <!-- 맛집 리스트 글쓰기 -->
 <div class="container" style="margin-top:100px">
 	<div class="row">
-		<div class="col-sm-3"></div>
-		<div class="col-sm-6">
+		<div class="col-sm-2"></div>
+		<div class="col-sm-8">
 			<div class="card shadow">
 				<div class="card-body">
 				<h3 class="text-center card-title"><strong>QnA 상세보기</strong></h3>
