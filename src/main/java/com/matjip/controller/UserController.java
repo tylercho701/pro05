@@ -107,11 +107,16 @@ public class UserController {
 	
 	@PostMapping("/update_procedure")
 	public String updateProcedure(@Valid @ModelAttribute("loggedUserInfo") UserBean loggedUserInfo,
-								  HttpServletRequest request, BindingResult result) {
+								  HttpServletRequest request, BindingResult result, Model model) {
 		
 		if(result.hasErrors()) {
 			HttpSession session = request.getSession();
 			String sid = (String) session.getAttribute("sid");
+			loggedUserInfo = userService.getLoggedUserInfo(sid);
+			//	System.out.println(loggedUserInfo.getUser_pw());
+			loggedUserInfo.setUser_pw2(loggedUserInfo.getUser_pw());
+			
+			model.addAttribute("loggedUserInfo", loggedUserInfo);
 			return "user/modify";
 		}
 		

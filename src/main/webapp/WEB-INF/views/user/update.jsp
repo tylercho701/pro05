@@ -36,25 +36,38 @@
 					return false;
 				}
 				
-		      const regExpS = /[!?@#$%^&*():;+-=~{}<>\_\[\]\|\\\"\'\,\.\/\`\₩]/g;
-		      const regExpK = /[ㄱ-ㅎㅏ-ㅣ가-힣]/g;
-		      const regExpN = /[0-9]/g;
-		      const regExpE = /[a-zA-Z]/g;
+		      const regExpS = /[!?@#$%^&*():;+-=~{}<>\_\[\]\|\\\"\'\,\.\/\`\₩]/;
+		      const regExpK = /[ㄱ-ㅎㅏ-ㅣ가-힣]/;
+		      const regExpN = /[0-9]/;
+		      const regExpE = /[a-zA-Z]/;
+		      const regExpEmail = /@/;
 		      
 		      //   이름 제약 조건
-		      if(regExpK.test(f.user_name) && f.user_name.length === 2){
+		      if(f.user_name.length() < 2){
 		         return true;
 		      } else {
 		         alert("이름은 한글 2자 이상 입력하세요.")
-		         f.user_name.focus()
+		         f.user_name.focus();
 		         return false;
 		      }
+		      
 		      if(regExpS.test(f.user_name)){
 		         alert("이름에는 특수문자가 포함될 수 없습니다.")
-		         f.user_name.focus()
+		         f.user_name.focus();
 		         return false;
 		      } else {
 		         return true;
+		      }
+		      if(regExpN.test(f.user_phone)){
+		    	  return true;
+		      } else if (f.user_phone.length > 11){
+		    	  alert("연락처는 - 표기 없이 입력하세요.");
+		    	  f.user_phone.focus();
+		    	  return false;
+		      }{
+		         alert("연락처는 '-' 없이 은 한글 2자 이상 입력하세요.")
+		         f.user_name.focus()
+		         return false;
 		      }
 		      
 		   }
@@ -93,14 +106,17 @@
 								<div class="form-group">
 									<form:label path="user_name">이름</form:label>
 									<form:input path="user_name" class="form-control"/>
+									<!--<form:errors path="user_name" style="color:red; " /> -->
 								</div>
 								<div class="form-group">
 									<form:label path="user_phone">연락처</form:label>
 									<form:input path="user_phone" class="form-control"/>
+									<!-- <form:errors path="user_phone" style="color:red; " /> -->
 								</div>
 								<div class="form-group">
 									<form:label path="user_email">이메일</form:label>
-									<form:input path="user_email" class="form-control"/><br>
+									<form:input path="user_email" class="form-control"/>
+									<!-- <form:errors path="user_email" style="color:red; " />  -->
 								</div>
 								<div class="form-group">
 									<div class="text-right">

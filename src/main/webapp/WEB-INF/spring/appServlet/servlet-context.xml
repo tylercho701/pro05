@@ -61,7 +61,7 @@
 	<beans:bean	class="org.springframework.context.support.ReloadableResourceBundleMessageSource" id="messageSource">
 		<beans:property name="basenames">
 			<beans:list>
-				<beans:value>/WEB-INF/properties/error</beans:value>
+				<beans:value>/WEB-INF/properties/error.properties</beans:value>
 			</beans:list>
 		</beans:property>
 	</beans:bean>
