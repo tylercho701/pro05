@@ -35,41 +35,25 @@
 					f.user_pw.focus();
 					return false;
 				}
-				
-		      const regExpS = /[!?@#$%^&*():;+-=~{}<>\_\[\]\|\\\"\'\,\.\/\`\₩]/;
-		      const regExpK = /[ㄱ-ㅎㅏ-ㅣ가-힣]/;
-		      const regExpN = /[0-9]/;
-		      const regExpE = /[a-zA-Z]/;
-		      const regExpEmail = /@/;
-		      
-		      //   이름 제약 조건
-		      if(f.user_name.length() < 2){
-		         return true;
-		      } else {
-		         alert("이름은 한글 2자 이상 입력하세요.")
-		         f.user_name.focus();
-		         return false;
-		      }
-		      
-		      if(regExpS.test(f.user_name)){
-		         alert("이름에는 특수문자가 포함될 수 없습니다.")
-		         f.user_name.focus();
-		         return false;
-		      } else {
-		         return true;
-		      }
-		      if(regExpN.test(f.user_phone)){
-		    	  return true;
-		      } else if (f.user_phone.length > 11){
-		    	  alert("연락처는 - 표기 없이 입력하세요.");
-		    	  f.user_phone.focus();
-		    	  return false;
-		      }{
-		         alert("연락처는 '-' 없이 은 한글 2자 이상 입력하세요.")
-		         f.user_name.focus()
-		         return false;
-		      }
-		      
+				if(f.user_name.value.length < 2 || f.user_name.value.length > 6){
+					alert("이름은 최소 2 ~ 6글자 이내로 입력하세요.");
+					f.user_name.focus();
+					return false;
+				}
+				if(!f.user_phone.value.length === 11){
+					alert("연락처는 기호 없이 11자리를 입력하세요.");
+					f.user_phone.focus();
+					return false;
+				}
+				if(f.user_email.value.indexOf("@") == -1){
+					alert("이메일 주소를 확인하세요.");
+					f.user_email.focus();
+					return false;
+				} else if(f.user_email.value.indexOf(".") == -1){
+					alert("이메일 주소를 확인하세요.");
+					f.user_email.focus();
+					return false;
+				}
 		   }
 		   function yesOrNo(){
 		      if(confirm("회원 탈퇴 시 작성한 모든 게시물이 삭제됩니다. 계속 진행하시겠습니까 ?")){
@@ -100,23 +84,19 @@
 								</div>
 								<div class="form-group">
 									<form:label path="user_pw2">비밀번호확인</form:label>
-									<!-- <input type="password" id="user_pw2" name="user_pw2" value="user_pw" class="form-control" >-->
 									<form:password path="user_pw2" class="form-control" showPassword="true" />
 								</div>
 								<div class="form-group">
 									<form:label path="user_name">이름</form:label>
 									<form:input path="user_name" class="form-control"/>
-									<!--<form:errors path="user_name" style="color:red; " /> -->
 								</div>
 								<div class="form-group">
 									<form:label path="user_phone">연락처</form:label>
 									<form:input path="user_phone" class="form-control"/>
-									<!-- <form:errors path="user_phone" style="color:red; " /> -->
 								</div>
 								<div class="form-group">
 									<form:label path="user_email">이메일</form:label>
 									<form:input path="user_email" class="form-control"/>
-									<!-- <form:errors path="user_email" style="color:red; " />  -->
 								</div>
 								<div class="form-group">
 									<div class="text-right">
