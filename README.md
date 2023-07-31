@@ -47,8 +47,7 @@
 #
 ## 일정계획서(WBS)
 ***
-![WBS_01](/included/WBS_01.jpg)<br>
-![WBS_02](/included/WBS_02.jpg)<br>
+![WBS_01](/included/WBS.jpg)<br>
 
 #
 ## DB 설계
