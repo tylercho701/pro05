@@ -13,7 +13,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
     	<meta name="generator" content="Jekyll v3.8.5">
-        <title>Jeju Matzip Team Project</title>
+        <title>Jeju Matjip Team Project</title>
         <script src="${pageContext.request.contextPath}/resources/js/color-modes.js"></script>
                 
         <!-- Favicon-->

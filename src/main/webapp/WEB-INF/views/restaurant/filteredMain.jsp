@@ -11,7 +11,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>맛집 리스트 보기</title>
+        <title>맛집 리스트 필터</title>
                 
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="./resources/assets/favicon.ico" />
@@ -29,7 +29,7 @@
         <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src="${pageContext.request.contextPath}/resources/js/color-modes.js"></script>
 	
-	<style>
+	<!-- <style>
 	.container-wrap {
 		margin-top: 120px;
 		position: relative;
@@ -44,114 +44,123 @@
 		display: flex;
 		margin: 0 auto;
 	}
-	</style>
+	</style> -->
 	
 </head>
 
 <body>
-
-<!-- Header -->
-<c:import url="/WEB-INF/views/include/top_menu.jsp"></c:import>	
-
-
-<!-- 게시글 리스트 -->
-<div class="container" style="margin-top:100px">
-	<div class="card shadow">
-		<div class="card-body">
-			<h4 class="card-title">맛집 리스트 보기</h4>
-			<form:form action="${root }/restaurant/restFilter_procedure" method="post" modelAttribute="filteredRestBean">
-				<label for="rs_region_cate"> 지역분류 </label>
-				<form:select path="region_name">
-					<form:option value="" >----선택하세요----</form:option>
-					<form:option value="서귀포">서귀포</form:option>
-					<form:option value="제주도">제주도</form:option>
-				</form:select>
-				<label for="rs_food_cate"> 음식분류 </label>
-				<form:select path="food_name">
-					<form:option value="">----선택하세요----</form:option>
-					<form:option value="식사">음식</form:option>
-					<form:option value="디저트">카페</form:option>
-				</form:select>
-				<form:button>필터</form:button>
-			</form:form>
-			
-	          <div class="text-right">
-	          </div>
-	       
-			<table class="table table-hover" id='restList'>
-				<thead>
-					<tr>
-						<th class="text-center d-none d-md-table-cell">글번호</th>
-						<th class="text-center w-50">제목</th>
-						<th class="text-center d-none d-md-table-cell">음식분류</th>
-						<th class="text-center d-none d-md-table-cell">지역분류</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="restBean" items="${restList }">
-						<tr>
-							<td class="text-center d-none d-md-table-cell">${restBean.rs_idx }</td>							
-							<td><a href="${root}/restaurant/detail?rs_idx=${restBean.rs_idx}&page=${page}">${restBean.rs_name }</a></td>		
-							<td class="text-center d-none d-md-table-cell">${restBean.food_name }</td>	
-							<td class="text-center d-none d-md-table-cell">${restBean.region_name }</td>				
-						</tr>
-					</c:forEach>					
-				</tbody>
-			</table>			
-			<div class="d-none d-md-block">
-				<ul class="pagination justify-content-center">
-					
-					<c:choose>
-						<c:when test="${pageBean.prevP <= 0}" >
-							<li class="page-item disabled" id="noPage">								
-								<a href="#" class="page-link">이전</a>
-							</li>
-						</c:when>
-						<c:otherwise>
-							<li class="page-item">
-								<a href="${root}/restaurant/filteredMain?page=${pageBean.prevP}" class="page-link">이전</a>
-							</li>						
-						</c:otherwise>
-					</c:choose>
-				
-					<c:forEach var="idx" begin ="${pageBean.min }" end = "${pageBean.max }" >					
-						<c:choose>
-							<c:when test="${idx == pageBean.currentP}">
-								<li class="page-item active">
-									<a href="${root}/restaurant/filteredMain?page=${idx}" class="page-link">${idx }</a>
-								</li>
-							</c:when>
-							<c:otherwise>
-								<li class="page-item">
-									<a href="${root}/restaurant/filteredMain?page=${idx}" class="page-link">${idx }</a>
-								</li>
-							</c:otherwise>
-						</c:choose>			
-					</c:forEach>
+	
+	<!-- Header -->
+	<c:import url="/WEB-INF/views/include/top_menu.jsp"></c:import>	
+	
+	
+	<!-- 게시글 리스트 -->
+	<div class="container" style="margin-top:100px">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="card shadow">
+					<div class="card-body">
+						<h4 class="card-title">맛집 리스트 보기</h4>
+						<form:form action="${root }/restaurant/restFilter_procedure" method="post" modelAttribute="filteredRestBean">
+							<label for="rs_region_cate"> 지역분류 </label>
+							<form:select path="region_name">
+								<form:option value="" >----선택하세요----</form:option>
+								<form:option value="서귀포">서귀포</form:option>
+								<form:option value="제주도">제주도</form:option>
+							</form:select>
+							<label for="rs_food_cate"> 음식분류 </label>
+							<form:select path="food_name">
+								<form:option value="">----선택하세요----</form:option>
+								<form:option value="식사">음식</form:option>
+								<form:option value="디저트">카페</form:option>
+							</form:select>
+							<form:button>필터</form:button>
+						</form:form>
+						
+				          <div class="text-right">
+				          </div>
+				       
+						<table class="table table-hover" id='restList'>
+							<thead>
+								<tr>
+									<th class="text-center d-none d-md-table-cell">글번호</th>
+									<th class="text-center w-50">제목</th>
+									<th class="text-center d-none d-md-table-cell">음식분류</th>
+									<th class="text-center d-none d-md-table-cell">지역분류</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="restBean" items="${restList }">
+									<tr>
+										<td class="text-center d-none d-md-table-cell">${restBean.rs_idx }</td>							
+										<td><a href="${root}/restaurant/detail?rs_idx=${restBean.rs_idx}&page=${page}">${restBean.rs_name }</a></td>		
+										<td class="text-center d-none d-md-table-cell">${restBean.food_name }</td>	
+										<td class="text-center d-none d-md-table-cell">${restBean.region_name }</td>				
+									</tr>
+								</c:forEach>					
+							</tbody>
+						</table>			
+						<div class="d-none d-md-block">
+							<ul class="pagination justify-content-center">
 								
-					<c:choose>
-						<c:when test="${pageBean.max >= pageBean.pageCnt}">
-							<li class="page-item disabled" id="noPage">
-								<a href="#" class="page-link">다음</a>
-							</li>
-						</c:when>
-						<c:otherwise>
-							<li class="page-item">
-								<a href="${root}/restaurant/filteredMain?page=${pageBean.nextP}" class="page-link">다음</a>
-							</li>
-						</c:otherwise>
-					</c:choose>						
-				</ul>
-			</div>			
-			<div class="text-right">
-				<a href="${root}/restaurant/write?&page=${page}" class="btn btn-primary">글쓰기</a>
+								<c:choose>
+									<c:when test="${pageBean.prevP <= 0}" >
+										<li class="page-item disabled" id="noPage">								
+											<a href="#" class="page-link">이전</a>
+										</li>
+									</c:when>
+									<c:otherwise>
+										<li class="page-item">
+											<a href="${root}/restaurant/filteredMain?page=${pageBean.prevP}" class="page-link">이전</a>
+										</li>						
+									</c:otherwise>
+								</c:choose>
+							
+								<c:forEach var="idx" begin ="${pageBean.min }" end = "${pageBean.max }" >					
+									<c:choose>
+										<c:when test="${idx == pageBean.currentP}">
+											<li class="page-item active">
+												<a href="${root}/restaurant/filteredMain?page=${idx}" class="page-link">${idx }</a>
+											</li>
+										</c:when>
+										<c:otherwise>
+											<li class="page-item">
+												<a href="${root}/restaurant/filteredMain?page=${idx}" class="page-link">${idx }</a>
+											</li>
+										</c:otherwise>
+									</c:choose>			
+								</c:forEach>
+											
+								<c:choose>
+									<c:when test="${pageBean.max >= pageBean.pageCnt}">
+										<li class="page-item disabled" id="noPage">
+											<a href="#" class="page-link">다음</a>
+										</li>
+									</c:when>
+									<c:otherwise>
+										<li class="page-item">
+											<a href="${root}/restaurant/filteredMain?page=${pageBean.nextP}" class="page-link">다음</a>
+										</li>
+									</c:otherwise>
+								</c:choose>						
+							</ul>
+						</div>			
+						<div class="text-right">
+							<a href="${root}/restaurant/write?&page=${page}" class="btn btn-primary">글쓰기</a>
+						</div>
+						
+					</div>
+				</div>
 			</div>
-			
 		</div>
 	</div>
-</div>
-
-<%-- <c:import url="/WEB-INF/views/include/bottom_menu.jsp" /> --%>
+	
+	<!-- Footer-->
+	<c:import url="/WEB-INF/views/include/bottom_menu.jsp"></c:import>	
+	<!-- Bootstrap core JS-->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- Core theme JS-->
+	<script src="${root }/resources/js/scripts.js"></script>
 
 </body>
 </html>

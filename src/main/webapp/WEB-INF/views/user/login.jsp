@@ -11,7 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Jeju Matzip_Login</title>
+        <title>로그인</title>
         <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src="${pageContext.request.contextPath}/resources/js/color-modes.js"></script>
                 

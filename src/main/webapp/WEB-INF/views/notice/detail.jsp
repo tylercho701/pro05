@@ -11,7 +11,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>공지사항 글 상세보기</title>
+        <title>공지사항 상세</title>
                 
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="./resources/assets/favicon.ico" />
@@ -29,7 +29,7 @@
         <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src="${pageContext.request.contextPath}/resources/js/color-modes.js"></script>
         
-	<style>
+	<!-- <style>
 	.container-wrap {
 		margin-top: 120px;
 		position: relative;
@@ -43,7 +43,7 @@
 		display: flex;
 		margin: 0 auto;
 	}
-	</style>
+	</style> -->
 	
 </head>
 <body>

@@ -1,5 +1,7 @@
 package com.matjip.bean;
 
+import javax.validation.constraints.NotBlank;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
@@ -8,8 +10,13 @@ import lombok.Data;
 public class RestBean {
 	
 	private int rs_idx; 						// 글번호
+	
+	@NotBlank
 	private String rs_name;					// 이름
+	
 	private String rs_file;					// 이미지파일
+	
+	@NotBlank
 	private String rs_content;			// 글내용
 	private String rs_phone;				// 전화번호
 	private String rs_addr;					// 주소

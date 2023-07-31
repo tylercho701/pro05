@@ -11,7 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Jeju Matzip_Join</title>
+        <title>회원가입</title>
         <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src="${pageContext.request.contextPath}/resources/js/color-modes.js"></script>
                 
@@ -25,7 +25,7 @@
 	    <!--<link href="${pageContext.request.contextPath}/resources/css/product.css" rel="stylesheet">-->
     	<link href="${pageContext.request.contextPath}/resources/css/carousel.css" rel="stylesheet">
     	
-	<style>
+	<!-- <style>
 	.container-wrap {
 		margin-top: 120px;
 		position: relative;
@@ -33,7 +33,7 @@
 	    padding-bottom: 250px;
 		bottom:0px;
 	}
-	</style>
+	</style> -->
 	
     </head>
     <script>
@@ -90,62 +90,58 @@
         
         <!-- Page Content-->
 		<div class="container" style="margin-top:100px; height: 545px;">
-            <!-- Heading Row-->
-            <div class="row gx-4 gx-lg-5 align-items-center my-5">
-                <div class="col-lg-3"></div>
-                <div class="col-lg-6">
+                <div class="col-sm-12">
 					<div class="card shadow">
-				<div class="card-body">
-					<form:form action="${root }user/join_procedure" method="post" modelAttribute="joinUserBean" onsubmit="return joinCheck(this)">
-					    <form:hidden path="userIdExist" />
-					    <input type="hidden" id="idck" name="idck" value="no" />
-						<div class="form-group">
-							<form:label path="user_id">아이디</form:label>
-							<div class="input-group">
-								<form:input path="user_id" class="form-control" onkeypress="resetUserIdExist()"/>
-								<div class="input-group-append">
-									<button type="button" class="btn btn-primary" onclick="checkUserIdExist()">중복확인</button>
+						<div class="card-body">
+							<form:form action="${root }user/join_procedure" method="post" modelAttribute="joinUserBean" onsubmit="return joinCheck(this)">
+							    <form:hidden path="userIdExist" />
+							    <input type="hidden" id="idck" name="idck" value="no" />
+								<div class="form-group">
+									<form:label path="user_id">아이디</form:label>
+									<div class="input-group">
+										<form:input path="user_id" class="form-control" onkeypress="resetUserIdExist()"/>
+										<div class="input-group-append">
+											<button type="button" class="btn btn-primary" onclick="checkUserIdExist()">중복확인</button>
+										</div>
+									</div>
+									<form:errors path="user_id" style="color:red;"/>
 								</div>
-							</div>
-							<form:errors path="user_id" style="color:red;"/>
+								<div class="form-group">
+									<form:label path="user_pw">비밀번호</form:label>
+									<form:password path="user_pw" class="form-control"/>
+									<form:errors path="user_pw" style="color:red;"/>
+								</div>
+								<div class="form-group">
+									<form:label path="user_pw2">비밀번호확인</form:label>
+									<form:password path="user_pw2" class="form-control"/>
+									<form:errors path="user_pw2" style="color:red;"/>
+								</div>
+								<div class="form-group">
+									<form:label path="user_name">이름</form:label>
+									<form:input path="user_name" class="form-control"/>
+									<form:errors path="user_name" style="color:red;"/>
+								</div>
+								<div class="form-group">
+									<form:label path="user_phone">연락처</form:label>
+									<form:input path="user_phone" class="form-control"/>
+									<form:errors path="user_phone" style="color:red;"/>
+								</div>
+								<div class="form-group">
+									<form:label path="user_email">이메일</form:label>
+									<form:input path="user_email" class="form-control"/><br>
+									<form:errors path="user_email" style="color:red;"/>
+								</div>
+								<div class="form-group">
+									<div class="text-right">
+										<form:button class="btn btn-primary">회원가입</form:button>
+									</div>
+								</div>
+							</form:form>
 						</div>
-						<div class="form-group">
-							<form:label path="user_pw">비밀번호</form:label>
-							<form:password path="user_pw" class="form-control"/>
-							<form:errors path="user_pw" style="color:red;"/>
-						</div>
-						<div class="form-group">
-							<form:label path="user_pw2">비밀번호확인</form:label>
-							<form:password path="user_pw2" class="form-control"/>
-							<form:errors path="user_pw2" style="color:red;"/>
-						</div>
-						<div class="form-group">
-							<form:label path="user_name">이름</form:label>
-							<form:input path="user_name" class="form-control"/>
-							<form:errors path="user_name" style="color:red;"/>
-						</div>
-						<div class="form-group">
-							<form:label path="user_phone">연락처</form:label>
-							<form:input path="user_phone" class="form-control"/>
-							<form:errors path="user_phone" style="color:red;"/>
-						</div>
-						<div class="form-group">
-							<form:label path="user_email">이메일</form:label>
-							<form:input path="user_email" class="form-control"/><br>
-							<form:errors path="user_email" style="color:red;"/>
-						</div>
-						<div class="form-group">
-							<div class="text-right">
-								<form:button class="btn btn-primary">회원가입</form:button>
-							</div>
-						</div>
-					</form:form>
+					</div>
 				</div>
-			</div>
-				</div>
-                <div class="col-lg-3"></div>
             </div>
-        </div>
+        
         <!-- Footer-->
         <c:import url="/WEB-INF/views/include/bottom_menu.jsp" />
         <!-- Bootstrap core JS-->

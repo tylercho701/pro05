@@ -171,6 +171,8 @@ public class RestController {
 		
 		PageBean revPageBean = reviewService.getReviewCntByResId(rs_idx, revPage);
 		model.addAttribute("revPageBean", revPageBean);
+		
+		model.addAttribute("revPage", revPage);
 
 		return "restaurant/detail";
 	}
@@ -224,13 +226,21 @@ public class RestController {
 	}
 
 	@PostMapping("/modify_procedure")
-	public String modifyProcedure(@Valid @ModelAttribute("modifyRestBean") RestBean modifyRestBean, 
+	public String modifyProcedure(@Valid @ModelAttribute("modifyRestBean") RestBean modifyRestBean,
+								  @RequestParam("rs_idx") int rs_idx,
 								  BindingResult result,	Model model, @RequestParam("page") int page) {
 
 		model.addAttribute("page", page);
 		if (result.hasErrors()) {
 			System.out.println("에러O");
 			System.out.println(result.getAllErrors());
+			
+			List<FoodBean> foodList = restService.getFoodTable();
+			System.out.println(foodList);
+			model.addAttribute("foodList", foodList);
+			List<RegionBean> regionList = restService.getRegionTable();
+			System.out.println(regionList);
+			model.addAttribute("regionList", regionList);
 
 			return "restaurant/modify";
 		}

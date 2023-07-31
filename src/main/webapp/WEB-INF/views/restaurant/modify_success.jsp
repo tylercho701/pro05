@@ -3,6 +3,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <c:set var="root" value="${pageContext.request.contextPath }/" />
 <script>
-	alert("게시글이 수정되었습니다");
+	alert("맛집 게시글이 수정되었습니다");
 	location.href = "${root}restaurant/detail?rs_idx=${modifyRestBean.rs_idx}&page=${page}";
 </script>
