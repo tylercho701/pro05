@@ -40,10 +40,11 @@
 			<div class="card shadow">
 				<div class="card-body">
 				<h3 class="text-center card-title"><strong>QnA 질문 상세보기</strong></h3>
+				<div class="form-group">
 	              <label for="qna_id">작성자</label>
 	              <input type="text" id="qna_id" name="qna_id" class="form-control" value="${qnaDetailBean.qna_id }" disabled="disabled"/>
-	           <!-- </div>
-	           <div class="form-group"> -->
+	           </div>
+	           <div class="form-group">
 	              <label for="qna_resdate">작성날짜</label>
 	              <input type="text" id="qna_resdate" name="qna_resdate" class="form-control" value="${qnaDetailBean.qna_resdate }" disabled="disabled"/>
 	           </div>
@@ -114,11 +115,12 @@
 	                        </tr>   
 	                     </c:if>         
 	                  </c:forEach>      
-	               </tbody>                       
-                  </table>               
-                 </div>            
-               </div>
-			</div>
+                  </tbody>                       
+               </table>               
+            </div>            
+        </div>
+	</div>
+</div>
    <c:import url="/WEB-INF/views/include/bottom_menu.jsp"></c:import>
    <!-- Bootstrap core JS-->
    <script
