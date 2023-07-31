@@ -144,10 +144,11 @@
 ***
 ### 최종발표 PPT
 [JejuMatjipProject.pptx](/included/JejuMatjipProject.pptx)<br>
-![슬라이드1](/.PNG)<br>
-![슬라이드2](/.PNG)<br>
-![슬라이드3](/.PNG)<br>
-
-
+![슬라이드1](/included/JejuMatjipProject/Slide01.JPG)<br>
+![슬라이드2](/included/JejuMatjipProject/Slide02.JPG)<br>
+![슬라이드3](/included/JejuMatjipProject/Slide03.JPG)<br>
+![슬라이드4](/included/JejuMatjipProject/Slide04.JPG)<br>
+![슬라이드5](/included/JejuMatjipProject/Slide05.JPG)<br>
+![슬라이드6](/included/JejuMatjipProject/Slide06.JPG)<br>
 
 
