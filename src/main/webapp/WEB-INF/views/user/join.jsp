@@ -81,6 +81,29 @@
 				alert("아이디 중복 체크를 하지 않으셨습니다.");
 				return false;
 			}
+			if(f.user_name.value.length < 2){
+				alert("이름은 최소 2글자 이상 입력하세요.");
+				f.user_name.focus();
+				return false;
+			} else if(f.user_name.value.length > 6){
+				alert("이름은 최대 6글자까지 입력 가능합니다.");
+				f.user_name.focus();
+				return false;
+			}
+			if(f.user_phone.value.length < 9){
+				alert("연락처는 최소 10자리 이상 입력하세요.");
+				f.user_phone.focus();
+				return false;
+			}
+			if(f.user_email.value.indexOf("@") == -1){
+				alert("이메일 주소를 확인하세요.");
+				f.user_email.focus();
+				return false;
+			} else if(f.user_email.value.indexOf(".") == -1){
+				alert("이메일 주소를 확인하세요.");
+				f.user_email.focus();
+				return false;
+			}
 		}
   
 </script>
@@ -104,32 +127,26 @@
 											<button type="button" class="btn btn-primary" onclick="checkUserIdExist()">중복확인</button>
 										</div>
 									</div>
-									<form:errors path="user_id" style="color:red;"/>
 								</div>
 								<div class="form-group">
 									<form:label path="user_pw">비밀번호</form:label>
 									<form:password path="user_pw" class="form-control"/>
-									<form:errors path="user_pw" style="color:red;"/>
 								</div>
 								<div class="form-group">
 									<form:label path="user_pw2">비밀번호확인</form:label>
 									<form:password path="user_pw2" class="form-control"/>
-									<form:errors path="user_pw2" style="color:red;"/>
 								</div>
 								<div class="form-group">
 									<form:label path="user_name">이름</form:label>
 									<form:input path="user_name" class="form-control"/>
-									<form:errors path="user_name" style="color:red;"/>
 								</div>
 								<div class="form-group">
 									<form:label path="user_phone">연락처</form:label>
 									<form:input path="user_phone" class="form-control"/>
-									<form:errors path="user_phone" style="color:red;"/>
 								</div>
 								<div class="form-group">
 									<form:label path="user_email">이메일</form:label>
 									<form:input path="user_email" class="form-control"/><br>
-									<form:errors path="user_email" style="color:red;"/>
 								</div>
 								<div class="form-group">
 									<div class="text-right">

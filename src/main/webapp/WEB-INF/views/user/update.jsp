@@ -35,13 +35,17 @@
 					f.user_pw.focus();
 					return false;
 				}
-				if(f.user_name.value.length < 2 || f.user_name.value.length > 6){
-					alert("이름은 최소 2 ~ 6글자 이내로 입력하세요.");
+				if(f.user_name.value.length < 2){
+					alert("이름은 최소 2글자 이상 입력하세요.");
+					f.user_name.focus();
+					return false;
+				} else if(f.user_name.value.length > 6){
+					alert("이름은 최대 6글자까지 입력 가능합니다.");
 					f.user_name.focus();
 					return false;
 				}
-				if(!f.user_phone.value.length === 11){
-					alert("연락처는 기호 없이 11자리를 입력하세요.");
+				if(f.user_phone.value.length < 9){
+					alert("연락처는 최소 10자리 이상 입력하세요.");
 					f.user_phone.focus();
 					return false;
 				}
