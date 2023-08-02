@@ -54,7 +54,7 @@
 
 <main>
 	<!-- 게시글 리스트 -->
-	<div class="container" style="margin-top:100px; height: auto;">
+	<div class="container" style="margin-top:160px; height: 470px;">
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="card shadow">

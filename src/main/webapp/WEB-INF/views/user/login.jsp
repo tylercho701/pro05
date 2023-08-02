@@ -34,7 +34,7 @@
         <c:import url="/WEB-INF/views/include/top_menu.jsp" />
         
         <!-- Page Content-->
-		<div class="container" style="margin-top:230px; height: 430px; ">
+		<div class="container" style="margin-top:170px; height: 465px;">
             <!-- Heading Row-->
             <div class="row gx-4 gx-lg-5 align-items-center my-5">
                 <div class="col-lg-3"></div>

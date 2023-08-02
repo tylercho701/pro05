@@ -68,7 +68,7 @@
              </div>
           </div>
 
-         <div class="card shadow">
+         <div class="card shadow" style="margin-top:30px">
 			<div class="card-body">
 				<h3 class="text-center card-title">댓글쓰기</h3>
 		         <form:form action="${root }qna/qnaReply_procedure" method="post" modelAttribute="replyQnaBean">
@@ -87,7 +87,7 @@
 		         </form:form>
 	         </div>
 	      </div>      
-         <div class="card shadow">
+         <div class="card shadow" style="margin-top:10px">
             <div class="card-body"><h3 style="text-align: center;">댓글</h3></div>
             <table class="table table-hover" id='답변을 달아줘'>      
                 <thead>

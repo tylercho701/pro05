@@ -52,7 +52,7 @@
 	<c:import url="/WEB-INF/views/include/top_menu.jsp"></c:import>	
 	
 	<!-- 게시글 리스트 -->
-	<div class="container" style="margin-top:100px; height: auto;">
+	<div class="container" style="margin-top:180px; height: 450px;">
 		<div class="row"></div>
 			<div class="col-sm-12">
 				<div class="card shadow">
